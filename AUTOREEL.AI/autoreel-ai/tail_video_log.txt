@@ -1,0 +1,147 @@
+INFO:     Will watch for changes in these directories: ['C:\\Projects\\AUTOREEL.AI\\autoreel-ai\\ai-services\\video_ai']
+INFO:     Uvicorn running on http://127.0.0.1:8004 (Press CTRL+C to quit)
+INFO:     Started reloader process [38388] using StatReload
+2026-03-25 08:28:36,270 | INFO | \U0001f4c1 PROJECT_ROOT: C:\Projects\AUTOREEL.AI\autoreel-ai
+2026-03-25 08:28:36,270 | INFO | \U0001f4c2 Loading backend env: C:\Projects\AUTOREEL.AI\autoreel-ai\backend\.env (exists: True)
+2026-03-25 08:28:36,270 | INFO | \U0001f4c2 Loading root env: C:\Projects\AUTOREEL.AI\autoreel-ai\.env (exists: True)
+2026-03-25 08:28:36,275 | INFO | \U0001f511 PEXELS_KEY found: True
+2026-03-25 08:28:36,275 | INFO | \U0001f511 RUNWAY_KEY found: True
+INFO:     Started server process [45528]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+2026-03-25 08:30:21,853 | INFO | \U0001f3ac Video start | topic=halku is walking (v1) | category=motivation | style=tiktok
+2026-03-25 08:30:21,853 | INFO |    Script provided: True (453 chars)
+2026-03-25 08:30:23,830 | INFO | \U0001f3b5 Fallback music: ambient_drone.wav
+2026-03-25 08:30:23,831 | INFO | \U0001f50d DEBUG: render_mode='stock', category='motivation', is_ai_video=False, is_avatar=False
+2026-03-25 08:30:23,831 | INFO | \U0001f511 DEBUG: RUNWAYML_API_SECRET=Set
+2026-03-25 08:30:23,831 | INFO | \U0001f3af Using AI scene plan (visual directions from script_ai)
+2026-03-25 08:30:23,831 | INFO | \U0001f3af AI Scene Plan: 11 scenes parsed
+2026-03-25 08:30:23,831 | INFO |    [SHOCKING] Scene 0: 'person looking camera intense' \u2190 "Most people work hard their entire life and s"
+2026-03-25 08:30:23,831 | INFO |    [CALM] Scene 1: 'empty road horizon' \u2190 "To stay in your lane."
+2026-03-25 08:30:23,831 | INFO |    [INSPIRING] Scene 2: 'runner finishing marathon' \u2190 "Pain is temporary. Regret is forever."
+2026-03-25 08:30:23,831 | INFO |    [CALM] Scene 3: 'person alone thinking' \u2190 "They told you to play it safe."
+2026-03-25 08:30:23,832 | INFO |    [INTENSE] Scene 4: 'boxer training gloves' \u2190 "Champions aren't made on good days."
+2026-03-25 08:30:23,832 | INFO |    [INTENSE] Scene 5: 'gym workout barbell' \u2190 "They sacrificed comfort for growth."
+2026-03-25 08:30:23,832 | INFO |    [INSPIRING] Scene 6: 'mountain summit sunrise' \u2190 "The people at the top didn't get lucky."
+2026-03-25 08:30:23,832 | INFO |    [SHOCKING] Scene 7: 'person looking mirror' \u2190 "And you almost believed them."
+2026-03-25 08:30:23,832 | INFO |    [INSPIRING] Scene 8: 'crowd cheering stadium' \u2190 "Follow if you're done settling for average."
+2026-03-25 08:30:23,832 | INFO |    [INTENSE] Scene 9: 'athlete training rain' \u2190 "They showed up when they didn't feel like it."
+2026-03-25 08:30:23,832 | INFO |    [INSPIRING] Scene 10: 'crowd cheering inspiring' \u2190 "Follow if you're done settling for average."
+2026-03-25 08:30:23,832 | INFO | \U0001f39e\ufe0f 11 scenes \u2192 3.1s each (audio=34.3s)
+2026-03-25 08:30:23,833 | INFO | \U0001f39e\ufe0f Fetching 11 scene clips (target 3.1s each)...
+2026-03-25 08:30:23,833 | INFO |    \U0001f3ac RunwayML: generating 3 key scenes sequentially (cap=3)
+2026-03-25 08:30:24,940 | INFO |    \U0001f680 Runway Scene 0 queuing: 'person looking camera intense'
+2026-03-25 08:30:24,994 | WARNING |    \u26a0\ufe0f Runway API error for Scene 0: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:30:25,718 | INFO | \U0001f3ac Video start | topic=halku is walking and singing (v1) | category=motivation | style=tiktok
+2026-03-25 08:30:25,718 | INFO |    Script provided: True (440 chars)
+2026-03-25 08:30:25,782 | INFO | \U0001f3b5 Fallback music: music_dark.wav
+2026-03-25 08:30:25,782 | INFO | \U0001f50d DEBUG: render_mode='stock', category='motivation', is_ai_video=False, is_avatar=False
+2026-03-25 08:30:25,782 | INFO | \U0001f511 DEBUG: RUNWAYML_API_SECRET=Set
+2026-03-25 08:30:25,782 | INFO | \U0001f3af Using AI scene plan (visual directions from script_ai)
+2026-03-25 08:30:25,783 | INFO | \U0001f3af AI Scene Plan: 11 scenes parsed
+2026-03-25 08:30:25,783 | INFO |    [SHOCKING] Scene 0: 'person looking camera intense' \u2190 "Most people work hard their entire life and s"
+2026-03-25 08:30:25,783 | INFO |    [CALM] Scene 1: 'person alone thinking' \u2190 "They told you to play it safe."
+2026-03-25 08:30:25,783 | INFO |    [CALM] Scene 2: 'empty road horizon' \u2190 "To stay in your lane."
+2026-03-25 08:30:25,783 | INFO |    [INTENSE] Scene 3: 'athlete training rain' \u2190 "They showed up when they didn't feel like it."
+2026-03-25 08:30:25,783 | INFO |    [CALM] Scene 4: 'dark room candle light' \u2190 "To stop dreaming so big."
+2026-03-25 08:30:25,783 | INFO |    [INSPIRING] Scene 5: 'crowd cheering stadium' \u2190 "Follow if you're done settling for average."
+2026-03-25 08:30:25,783 | INFO |    [SHOCKING] Scene 6: 'person looking mirror' \u2190 "And you almost believed them."
+2026-03-25 08:30:25,784 | INFO |    [INSPIRING] Scene 7: 'mountain summit sunrise' \u2190 "The people at the top didn't get lucky."
+2026-03-25 08:30:25,784 | INFO |    [INTENSE] Scene 8: 'boxer training gloves' \u2190 "Champions aren't made on good days."
+2026-03-25 08:30:25,784 | INFO |    [INTENSE] Scene 9: 'gym workout barbell' \u2190 "They sacrificed comfort for growth."
+2026-03-25 08:30:25,784 | INFO |    [INSPIRING] Scene 10: 'crowd cheering inspiring' \u2190 "Follow if you're done settling for average."
+2026-03-25 08:30:25,784 | INFO | \U0001f39e\ufe0f 11 scenes \u2192 3.0s each (audio=32.6s)
+2026-03-25 08:30:25,784 | INFO | \U0001f39e\ufe0f Fetching 11 scene clips (target 3.0s each)...
+2026-03-25 08:30:25,784 | INFO |    \U0001f3ac RunwayML: generating 3 key scenes sequentially (cap=3)
+2026-03-25 08:30:26,088 | INFO |    \U0001f680 Runway Scene 1 queuing: 'empty road horizon'
+2026-03-25 08:30:26,088 | WARNING |    \u26a0\ufe0f Runway API error for Scene 1: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:30:26,937 | INFO |    \U0001f680 Runway Scene 0 queuing: 'person looking camera intense'
+2026-03-25 08:30:26,938 | WARNING |    \u26a0\ufe0f Runway API error for Scene 0: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:30:27,225 | INFO |    \U0001f680 Runway Scene 2 queuing: 'runner finishing marathon'
+2026-03-25 08:30:27,225 | WARNING |    \u26a0\ufe0f Runway API error for Scene 2: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:30:27,226 | INFO |    \U0001f5bc\ufe0f Pexels: fetching 11 scenes in parallel...
+2026-03-25 08:30:28,109 | INFO |    \U0001f680 Runway Scene 1 queuing: 'person alone thinking'
+2026-03-25 08:30:28,109 | WARNING |    \u26a0\ufe0f Runway API error for Scene 1: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:30:29,249 | INFO |    \U0001f680 Runway Scene 2 queuing: 'empty road horizon'
+2026-03-25 08:30:29,249 | WARNING |    \u26a0\ufe0f Runway API error for Scene 2: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:30:29,251 | INFO |    \U0001f5bc\ufe0f Pexels: fetching 11 scenes in parallel...
+2026-03-25 08:30:41,726 | INFO |    \u2705 Scene 1: 'empty road horizon' \u2192 raw_1_1774407629_956.mp4
+2026-03-25 08:30:54,293 | INFO |    \u2705 Scene 3: 'person alone thinking' \u2192 raw_3_1774407629_456.mp4
+2026-03-25 08:31:09,780 | INFO |    \u2705 Scene 5: 'gym workout barbell' \u2192 raw_5_1774407657_752.mp4
+2026-03-25 08:31:28,119 | INFO | \U0001f3ac Video start | topic=halku is moving (v1) | category=halku | style=tiktok
+2026-03-25 08:31:28,119 | INFO |    Script provided: True (288 chars)
+2026-03-25 08:31:28,189 | INFO | \U0001f3b5 Fallback music: music_epic.wav
+2026-03-25 08:31:28,189 | INFO | \U0001f50d DEBUG: render_mode='ai_video', category='halku', is_ai_video=True, is_avatar=False
+2026-03-25 08:31:28,189 | INFO | \U0001f511 DEBUG: RUNWAYML_API_SECRET=Set
+2026-03-25 08:31:28,189 | INFO | \U0001f3af Using AI scene plan (visual directions from script_ai)
+2026-03-25 08:31:28,189 | INFO | \U0001f3af AI Scene Plan: 7 scenes parsed
+2026-03-25 08:31:28,189 | INFO |    [SHOCKING] Scene 0: 'person looking camera intense' \u2190 "\u0939\u0932\u094d\u0915\u0942 \u0915\u094b \u0938\u092c \u0915\u092e\u091c\u093c\u094b\u0930 \u0938\u092e\u091d\u0924\u0947 \u0925\u0947\u0964 \u092a\u0930 \u0935\u094b \u0924\u0942\u092b\u093e\u0928 \u092c\u0928\u0928\u0947"
+2026-03-25 08:31:28,189 | INFO |    [SHOCKING] Scene 1: 'halku breaking chain dramatic explosion' \u2190 "\u090f\u0915 \u0926\u093f\u0928 \u0909\u0938\u0928\u0947 \u0935\u094b \u0915\u0930 \u0926\u093f\u0916\u093e\u092f\u093e \u091c\u094b \u0915\u093f\u0938\u0940 \u0928\u0947 \u0938\u094b\u091a\u093e \u0928 \u0925\u093e"
+2026-03-25 08:31:28,189 | INFO |    [CALM] Scene 2: 'halku sitting alone broken road dramatic lighting' \u2190 "\u0909\u0938\u0915\u0947 \u092a\u093e\u0938 \u0928 \u092a\u0948\u0938\u093e \u0925\u093e, \u0928 \u0928\u093e\u092e \u0925\u093e\u0964"
+2026-03-25 08:31:28,190 | INFO |    [INTENSE] Scene 3: 'muscular green halku training hard rural india slow motion' \u2190 "\u0909\u0938\u0928\u0947 \u0930\u093e\u0924 \u0926\u093f\u0928 \u092e\u0947\u0939\u0928\u0924 \u0915\u0940, \u092c\u093f\u0928\u093e \u0930\u0941\u0915\u0947\u0964"
+2026-03-25 08:31:28,190 | INFO |    [INTENSE] Scene 4: 'close up halku determined eyes cinematic' \u2190 "\u0938\u093f\u0930\u094d\u092b \u090f\u0915 \u091c\u0941\u0928\u0942\u0928 \u0925\u093e � \u092c\u0926\u0932\u0928\u093e \u0939\u0948\u0964"
+2026-03-25 08:31:28,190 | INFO |    [INSPIRING] Scene 5: 'halku standing golden lamborghini drone shot' \u2190 "\u0939\u0932\u094d\u0915\u0942 \u0915\u0940 \u0915\u0939\u093e\u0928\u0940 \u092c\u0938 \u0936\u0941\u0930\u0941\u0906\u0924 \u0939\u0948\u0964"
+2026-03-25 08:31:28,190 | INFO |    [INSPIRING] Scene 6: 'crowd cheering inspiring' \u2190 "Follow \u0915\u0930\u094b \u0905\u0917\u0930 \u0924\u0941\u092e \u092d\u0940 \u0905\u092a\u0928\u0940 \u0915\u0939\u093e\u0928\u0940 \u092c\u0926\u0932\u0928\u093e \u091a\u093e\u0939\u0924\u0947 "
+2026-03-25 08:31:28,190 | INFO | \U0001f39e\ufe0f 7 scenes \u2192 2.0s each (audio=1.6s)
+2026-03-25 08:31:28,190 | INFO | \U0001f39e\ufe0f Fetching 7 scene clips (target 2.0s each)...
+2026-03-25 08:31:28,190 | INFO |    \U0001f3ac RunwayML: generating 3 key scenes sequentially (cap=3)
+2026-03-25 08:31:28,997 | INFO |    \u2705 Scene 0: 'person looking camera intense' \u2192 raw_0_1774407631_292.mp4
+2026-03-25 08:31:29,233 | INFO |    \U0001f680 Runway Scene 0 queuing: 'person looking camera intense'
+2026-03-25 08:31:29,233 | WARNING |    \u26a0\ufe0f Runway API error for Scene 0: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:31:30,379 | INFO |    \U0001f680 Runway Scene 1 queuing: 'halku breaking chain dramatic explosion'
+2026-03-25 08:31:30,379 | WARNING |    \u26a0\ufe0f Runway API error for Scene 1: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:31:31,407 | INFO |    \U0001f680 Runway Scene 2 queuing: 'halku sitting alone broken road dramatic lighting'
+2026-03-25 08:31:31,407 | WARNING |    \u26a0\ufe0f Runway API error for Scene 2: Missing required arguments; Expected either ('duration', 'model', 'prompt_text' and 'ratio') or ('model', 'prompt_text' and 'ratio') arguments to be given. Falling back to Pexels...
+2026-03-25 08:31:31,408 | INFO |    \U0001f5bc\ufe0f Pexels: fetching 7 scenes in parallel...
+2026-03-25 08:31:32,051 | INFO |    \u2705 Scene 0: 'person looking camera intense' \u2192 raw_0_1774407628_343.mp4
+2026-03-25 08:31:35,634 | INFO |    \u2705 Scene 4: 'dark room candle light' \u2192 raw_4_1774407691_372.mp4
+2026-03-25 08:31:36,679 | INFO |    \u2705 Scene 1: 'person alone thinking' \u2192 raw_1_1774407631_658.mp4
+2026-03-25 08:31:48,755 | INFO |    \u2705 Scene 7: 'person looking mirror' \u2192 raw_7_1774407694_296.mp4
+2026-03-25 08:31:49,845 | INFO |    \u2705 Scene 2: 'halku sitting alone broken road dramatic lighting' \u2192 raw_2_1774407694_315.mp4
+2026-03-25 08:31:50,000 | INFO |    \u2705 Scene 3: 'athlete training rain' \u2192 raw_3_1774407631_505.mp4
+2026-03-25 08:32:07,995 | INFO |    \u2705 Scene 5: 'crowd cheering stadium' \u2192 raw_5_1774407698_946.mp4
+2026-03-25 08:32:10,303 | INFO |    \u2705 Scene 3: 'muscular green halku training hard rural india slow motion' \u2192 raw_3_1774407693_154.mp4
+2026-03-25 08:32:20,013 | INFO |    \u2705 Scene 8: 'crowd cheering stadium' \u2192 raw_8_1774407710_719.mp4
+2026-03-25 08:32:29,772 | INFO |    \u2705 Scene 4: 'close up halku determined eyes cinematic' \u2192 raw_4_1774407712_673.mp4
+2026-03-25 08:32:29,969 | INFO |    \u2705 Scene 6: 'mountain summit sunrise' \u2192 raw_6_1774407673_380.mp4
+2026-03-25 08:32:36,630 | INFO |    \u2705 Scene 6: 'crowd cheering inspiring' \u2192 raw_6_1774407752_329.mp4
+2026-03-25 08:32:47,572 | INFO |    \u2705 Scene 4: 'boxer training gloves' \u2192 raw_4_1774407643_822.mp4
+2026-03-25 08:32:48,457 | INFO |    \u2705 Scene 5: 'halku standing golden lamborghini drone shot' \u2192 raw_5_1774407732_719.mp4
+2026-03-25 08:32:53,077 | INFO |    \u2705 Scene 7: 'mountain summit sunrise' \u2192 raw_7_1774407712_170.mp4
+2026-03-25 08:32:58,175 | INFO |    \u2705 Scene 9: 'athlete training rain' \u2192 raw_9_1774407742_960.mp4
+2026-03-25 08:33:00,449 | INFO |    \u2705 Scene 6: 'person looking mirror' \u2192 raw_6_1774407699_467.mp4
+2026-03-25 08:33:03,587 | INFO |    \u2705 Scene 8: 'boxer training gloves' \u2192 raw_8_1774407730_431.mp4
+2026-03-25 08:33:13,918 | INFO |    \u2705 Scene 10: 'crowd cheering inspiring' \u2192 raw_10_1774407782_699.mp4
+2026-03-25 08:33:21,399 | INFO |    \u2705 Scene 0: 'person looking camera intense' \u2192 raw_0_1774407694_906.mp4
+2026-03-25 08:33:26,168 | INFO |    \u2705 Scene 1: 'halku breaking chain dramatic explosion' \u2192 raw_1_1774407694_454.mp4
+2026-03-25 08:33:26,177 | INFO |    \U0001f4e6 Got 7/7 clips successfully
+2026-03-25 08:33:26,178 | INFO | \U0001f3ac MULTI-CLIP mode (7 clips) | split=False | ai_plan=True
+2026-03-25 08:33:35,999 | INFO |    \u2705 Scene 9: 'gym workout barbell' \u2192 raw_9_1774407776_601.mp4
+2026-03-25 08:33:50,564 | INFO | \U0001f525 Final render: subtitles + watermark + progress bar + audio mix
+2026-03-25 08:33:54,648 | WARNING | \u26a0\ufe0f Thumbnail failed: written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.01    
+Conversion failed!
+
+2026-03-25 08:33:54,648 | INFO | \u2705 Video done: final_1774407688.mp4
+INFO:     127.0.0.1:54695 - "POST /generate-video HTTP/1.1" 200 OK
+2026-03-25 08:33:55,047 | INFO |    \u2705 Scene 10: 'crowd cheering inspiring' \u2192 raw_10_1774407752_243.mp4
+2026-03-25 08:33:55,324 | INFO |    \u2705 Scene 2: 'runner finishing marathon' \u2192 raw_2_1774407629_508.mp4
+2026-03-25 08:33:55,333 | INFO |    \U0001f4e6 Got 11/11 clips successfully
+2026-03-25 08:33:55,333 | INFO | \U0001f3ac MULTI-CLIP mode (11 clips) | split=False | ai_plan=True
+2026-03-25 08:34:11,276 | INFO |    \u2705 Scene 2: 'empty road horizon' \u2192 raw_2_1774407632_801.mp4
+2026-03-25 08:34:11,283 | INFO |    \U0001f4e6 Got 11/11 clips successfully
+2026-03-25 08:34:11,283 | INFO | \U0001f3ac MULTI-CLIP mode (11 clips) | split=False | ai_plan=True
+2026-03-25 08:35:03,187 | INFO | \U0001f525 Final render: subtitles + watermark + progress bar + audio mix
+2026-03-25 08:35:20,543 | INFO | \U0001f525 Final render: subtitles + watermark + progress bar + audio mix
+2026-03-25 08:35:36,368 | WARNING | \u26a0\ufe0f Thumbnail failed: written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.02    
+Conversion failed!
+
+2026-03-25 08:35:36,369 | INFO | \u2705 Video done: final_1774407623.mp4
+INFO:     127.0.0.1:51546 - "POST /generate-video HTTP/1.1" 200 OK
+2026-03-25 08:35:47,583 | WARNING | \u26a0\ufe0f Thumbnail failed: written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.01    
+Conversion failed!
+
+2026-03-25 08:35:47,583 | INFO | \u2705 Video done: final_1774407625.mp4
+INFO:     127.0.0.1:51547 - "POST /generate-video HTTP/1.1" 200 OK

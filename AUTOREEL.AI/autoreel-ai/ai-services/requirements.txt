@@ -1,0 +1,13 @@
+﻿
+anthropic
+edge-tts
+fastapi
+faster-whisper
+google-generativeai
+Pillow
+pydantic
+python-dotenv
+requests
+runwayml
+runwayml>=0.1.0
+uvicorn

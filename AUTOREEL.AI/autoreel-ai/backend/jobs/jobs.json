@@ -1,0 +1,526 @@
+[
+  {
+    "id": "job_1770714434026",
+    "status": "CREATED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": null,
+    "createdAt": "2026-02-10T09:07:14.027Z",
+    "updatedAt": "2026-02-10T09:07:14.027Z"
+  },
+  {
+    "id": "job_1770714434029",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "Request failed with status code 422",
+    "createdAt": "2026-02-10T09:07:14.029Z",
+    "updatedAt": "2026-02-10T09:07:14.073Z"
+  },
+  {
+    "id": "job_1770714556278",
+    "status": "CREATED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": null,
+    "createdAt": "2026-02-10T09:09:16.278Z",
+    "updatedAt": "2026-02-10T09:09:16.278Z"
+  },
+  {
+    "id": "job_1770714556281",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "Request failed with status code 422",
+    "createdAt": "2026-02-10T09:09:16.281Z",
+    "updatedAt": "2026-02-10T09:09:16.315Z"
+  },
+  {
+    "id": "job_1770714855954",
+    "status": "CREATED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": null,
+    "createdAt": "2026-02-10T09:14:15.954Z",
+    "updatedAt": "2026-02-10T09:14:15.954Z"
+  },
+  {
+    "id": "job_1770714855955",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "Request failed with status code 422",
+    "createdAt": "2026-02-10T09:14:15.955Z",
+    "updatedAt": "2026-02-10T09:14:16.013Z"
+  },
+  {
+    "id": "job_1770714861369",
+    "status": "CREATED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": null,
+    "createdAt": "2026-02-10T09:14:21.369Z",
+    "updatedAt": "2026-02-10T09:14:21.369Z"
+  },
+  {
+    "id": "job_1770714861371",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "Request failed with status code 422",
+    "createdAt": "2026-02-10T09:14:21.371Z",
+    "updatedAt": "2026-02-10T09:14:21.410Z"
+  },
+  {
+    "id": "job_1770715090482",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:18:10.482Z",
+    "updatedAt": "2026-02-10T09:18:12.781Z"
+  },
+  {
+    "id": "job_1770715150493",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:19:10.493Z",
+    "updatedAt": "2026-02-10T09:19:10.737Z"
+  },
+  {
+    "id": "job_1770715210501",
+    "topic": "self improvement",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:20:10.501Z",
+    "updatedAt": "2026-02-10T09:20:10.750Z"
+  },
+  {
+    "id": "job_1770715270501",
+    "topic": "focus and consistency",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:21:10.501Z",
+    "updatedAt": "2026-02-10T09:21:10.758Z"
+  },
+  {
+    "id": "job_1770715330510",
+    "topic": "daily motivation",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:22:10.510Z",
+    "updatedAt": "2026-02-10T09:22:10.744Z"
+  },
+  {
+    "id": "job_1770715390513",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:23:10.513Z",
+    "updatedAt": "2026-02-10T09:23:10.749Z"
+  },
+  {
+    "id": "job_1770715450524",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_AI_FAILED",
+    "createdAt": "2026-02-10T09:24:10.524Z",
+    "updatedAt": "2026-02-10T09:24:10.775Z"
+  },
+  {
+    "id": "job_1770715531419",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "The \"to\" argument must be of type string. Received null",
+    "createdAt": "2026-02-10T09:25:31.419Z",
+    "updatedAt": "2026-02-10T09:25:31.831Z"
+  },
+  {
+    "id": "job_1770715591426",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "The \"to\" argument must be of type string. Received null",
+    "createdAt": "2026-02-10T09:26:31.426Z",
+    "updatedAt": "2026-02-10T09:26:31.669Z"
+  },
+  {
+    "id": "job_1770715686086",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "The \"to\" argument must be of type string. Received null",
+    "createdAt": "2026-02-10T09:28:06.086Z",
+    "updatedAt": "2026-02-10T09:28:06.339Z"
+  },
+  {
+    "id": "job_1770715746087",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "The \"to\" argument must be of type string. Received null",
+    "createdAt": "2026-02-10T09:29:06.087Z",
+    "updatedAt": "2026-02-10T09:29:06.329Z"
+  },
+  {
+    "id": "job_1770715853720",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:30:53.720Z",
+    "updatedAt": "2026-02-10T09:30:53.953Z"
+  },
+  {
+    "id": "job_1770715913729",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:31:53.729Z",
+    "updatedAt": "2026-02-10T09:31:53.968Z"
+  },
+  {
+    "id": "job_1770715973742",
+    "topic": "self improvement",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:32:53.742Z",
+    "updatedAt": "2026-02-10T09:32:53.953Z"
+  },
+  {
+    "id": "job_1770716033745",
+    "topic": "focus and consistency",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:33:53.745Z",
+    "updatedAt": "2026-02-10T09:33:53.941Z"
+  },
+  {
+    "id": "job_1770716093755",
+    "topic": "daily motivation",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:34:53.755Z",
+    "updatedAt": "2026-02-10T09:34:53.950Z"
+  },
+  {
+    "id": "job_1770716153768",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:35:53.768Z",
+    "updatedAt": "2026-02-10T09:35:53.959Z"
+  },
+  {
+    "id": "job_1770716213778",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:36:53.778Z",
+    "updatedAt": "2026-02-10T09:36:53.979Z"
+  },
+  {
+    "id": "job_1770716273790",
+    "topic": "self improvement",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:37:53.790Z",
+    "updatedAt": "2026-02-10T09:37:53.984Z"
+  },
+  {
+    "id": "job_1770716333794",
+    "topic": "focus and consistency",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:38:53.794Z",
+    "updatedAt": "2026-02-10T09:38:53.997Z"
+  },
+  {
+    "id": "job_1770716393797",
+    "topic": "daily motivation",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:39:53.797Z",
+    "updatedAt": "2026-02-10T09:39:56.265Z"
+  },
+  {
+    "id": "job_1770716605629",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:43:25.629Z",
+    "updatedAt": "2026-02-10T09:43:25.850Z"
+  },
+  {
+    "id": "job_1770716665595",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:44:25.595Z",
+    "updatedAt": "2026-02-10T09:44:25.793Z"
+  },
+  {
+    "id": "job_1770716725610",
+    "topic": "self improvement",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:45:25.610Z",
+    "updatedAt": "2026-02-10T09:45:25.830Z"
+  },
+  {
+    "id": "job_1770716785617",
+    "topic": "focus and consistency",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:46:25.617Z",
+    "updatedAt": "2026-02-10T09:46:25.828Z"
+  },
+  {
+    "id": "job_1770716845631",
+    "topic": "daily motivation",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:47:25.631Z",
+    "updatedAt": "2026-02-10T09:47:25.812Z"
+  },
+  {
+    "id": "job_1770716905632",
+    "topic": "discipline",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:48:25.632Z",
+    "updatedAt": "2026-02-10T09:48:25.822Z"
+  },
+  {
+    "id": "job_1770716965646",
+    "topic": "success mindset",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:49:25.646Z",
+    "updatedAt": "2026-02-10T09:49:25.829Z"
+  },
+  {
+    "id": "job_1770717025648",
+    "topic": "self improvement",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:50:25.648Z",
+    "updatedAt": "2026-02-10T09:50:25.836Z"
+  },
+  {
+    "id": "job_1770717085649",
+    "topic": "focus and consistency",
+    "status": "FAILED",
+    "steps": {
+      "script": null,
+      "audio": null,
+      "subtitles": null,
+      "video": null
+    },
+    "error": "VIDEO_PATH_INVALID",
+    "createdAt": "2026-02-10T09:51:25.649Z",
+    "updatedAt": "2026-02-10T09:51:25.862Z"
+  }
+]

@@ -1,0 +1,71 @@
+# Render Blueprint for AutoReel.AI (Free Tier Deployment Plan)
+# Reference: https://render.com/docs/blueprints
+
+services:
+  # 1. AI Monolith (Consolidated Python Service)
+  - type: web
+    name: autoreel-ai-service
+    env: docker
+    dockerContext: ai-services
+    dockerfilePath: Dockerfile
+    plan: free
+    region: ohio
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: PEXELS_API_KEY
+        sync: false
+      - key: STABILITY_API_KEY
+        sync: false
+      - key: RUNWAYML_API_SECRET
+        sync: false
+
+  # 2. Node.js Backend
+  - type: web
+    name: autoreel-backend
+    env: node
+    plan: free
+    region: ohio
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: AI_SERVICE_URL
+        fromService:
+          name: autoreel-ai-service
+          type: web
+          property: host
+      - key: FRONTEND_URL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: STORAGE_TYPE
+        value: s3
+      - key: S3_REGION
+        sync: false
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_BUCKET_NAME
+        sync: false
+      - key: S3_PUBLIC_URL
+        sync: false

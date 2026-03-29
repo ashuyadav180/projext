@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+**/node_modules/
+venv/
+**/venv/
+env/
+__pycache__/
+*.pyc
+
+# Production / Build
+dist/
+build/
+.next/
+out/
+
+# Storage / Local Cache
+storage/
+**/storage/
+*.log
+.DS_Store
+
+# Sensitive
+.env
+**/.env
+auth_url.txt
+*.bak
+jobs/jobs.db
+jobs/jobs.db.json

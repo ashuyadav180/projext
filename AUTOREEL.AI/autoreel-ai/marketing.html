@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoReel.AI — Generate Viral Videos on Autopilot</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060f;
+  --bg2:#0a0a16;
+  --surface:#0e0e1c;
+  --surface2:#13132200;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --accent:#6366f1;
+  --accent2:#818cf8;
+  --accent-soft:rgba(99,102,241,0.15);
+  --accent-glow:rgba(99,102,241,0.3);
+  --orange:#f97316;
+  --green:#22d3a5;
+  --red:#f43f5e;
+  --text:#f0f0fa;
+  --text2:#9090b0;
+  --text3:#50507a;
+  --heading-font:'Bricolage Grotesque',sans-serif;
+  --body-font:'Plus Jakarta Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body-font);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+
+/* Custom cursor */
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(99,102,241,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s ease;mix-blend-mode:screen}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent-soft);border-radius:4px}
+
+/* ── NOISE OVERLAY ── */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+/* ══════════ NAVBAR ══════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px);border-bottom:1px solid var(--border);background:rgba(6,6,15,0.7);transition:all .3s}
+nav.scrolled{height:58px;background:rgba(6,6,15,0.95)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--heading-font);font-size:20px;font-weight:800;text-decoration:none;color:var(--text)}
+.nav-logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#6366f1,#f97316);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 4px 16px rgba(99,102,241,0.4)}
+.nav-logo span{color:#818cf8}
+.nav-links{display:flex;align-items:center;gap:12px}
+.nav-links a{padding:7px 14px;color:var(--text2);font-size:14px;font-weight:500;text-decoration:none;border-radius:8px;transition:all .18s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.live-dot{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:600;padding:5px 12px;background:rgba(34,211,165,0.08);border:1px solid rgba(34,211,165,0.2);border-radius:20px}
+.live-dot::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(0.85)}}
+.nav-dashboard{color:var(--text2);font-size:14px;font-weight:500;text-decoration:none;padding:7px 14px;transition:color .18s}
+.nav-dashboard:hover{color:var(--text)}
+.nav-cta{padding:8px 20px;background:var(--text);color:var(--bg);border-radius:20px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:var(--body-font)}
+.nav-cta:hover{background:var(--accent2);color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.4)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:var(--surface);border:1px solid var(--border2);border-radius:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .25s}
+
+/* Mobile nav overlay */
+.mobile-overlay{position:fixed;inset:0;background:rgba(6,6,15,0.98);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-overlay.open{opacity:1;pointer-events:all}
+.mobile-overlay a{font-family:var(--heading-font);font-size:28px;font-weight:700;color:var(--text2);text-decoration:none;transition:color .18s}
+.mobile-overlay a:hover{color:var(--text)}
+.mobile-close{position:absolute;top:24px;right:24px;font-size:28px;cursor:pointer;color:var(--text2)}
+
+/* ══════════ HERO ══════════ */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 40px 80px;text-align:center;position:relative;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;animation:orbFloat 12s ease-in-out infinite}
+.hero-orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(99,102,241,0.18),transparent 70%);top:-100px;left:-100px;animation-delay:0s}
+.hero-orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(249,115,22,0.12),transparent 70%);bottom:-50px;right:-80px;animation-delay:-5s}
+.hero-orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(34,211,165,0.08),transparent 70%);top:40%;left:50%;transform:translate(-50%,-50%);animation-delay:-9s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(0.97)}}
+.hero-orb1{animation-name:orbFloat1}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+
+.hero-badge{display:inline-flex;align-items:center;gap:12px;padding:8px 18px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:30px;font-size:13px;color:var(--text2);margin-bottom:28px;position:relative;z-index:1}
+.hero-badge-stars{color:#fbbf24;letter-spacing:2px;font-size:11px}
+.hero-badge-sep{width:1px;height:14px;background:var(--border2)}
+
+.hero-title{font-family:var(--heading-font);font-size:clamp(40px,6vw,76px);font-weight:800;line-height:1.08;letter-spacing:-2px;position:relative;z-index:1;margin-bottom:20px;max-width:900px}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:block;animation:lineUp .8s cubic-bezier(.16,1,.3,1) backwards}
+.hero-title .line:nth-child(1) span{animation-delay:.1s}
+.hero-title .line:nth-child(2) span{animation-delay:.22s}
+.hero-title .line:nth-child(3) span{animation-delay:.34s}
+@keyframes lineUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.gradient-text{background:linear-gradient(135deg,#6366f1 0%,#a78bfa 40%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Typewriter */
+.typewriter-wrap{display:inline-block;min-width:380px;text-align:left}
+.typewriter{border-right:3px solid var(--accent);padding-right:4px;animation:blink-caret .75s step-end infinite;white-space:nowrap}
+@keyframes blink-caret{from,to{border-color:transparent}50%{border-color:var(--accent)}}
+
+.hero-sub{font-size:clamp(15px,2vw,18px);color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:36px;position:relative;z-index:1;animation:fadeUp .8s .5s backwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;position:relative;z-index:1;animation:fadeUp .8s .65s backwards}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,#6366f1,#818cf8);border:none;border-radius:12px;color:#fff;font-family:var(--body-font);font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 32px rgba(99,102,241,0.4);transition:all .22s;position:relative;overflow:hidden;text-decoration:none}
+.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left .5s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(99,102,241,0.55)}
+.btn-primary:hover::after{left:150%}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:12px;color:var(--text);font-family:var(--body-font);font-size:15px;font-weight:600;cursor:pointer;transition:all .22s;text-decoration:none}
+.btn-outline:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
+
+/* Marquee ticker */
+.ticker-wrap{width:100%;overflow:hidden;position:relative;z-index:1;margin-bottom:48px;animation:fadeUp .8s .8s backwards}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.ticker{display:flex;gap:0;animation:ticker 25s linear infinite;width:max-content}
+.ticker:hover{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:7px 20px;font-size:12px;color:var(--text3);white-space:nowrap}
+.ticker-item strong{color:var(--text2)}
+.ticker-sep{color:var(--text3);margin:0 4px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Platform logos */
+.platforms{display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1;animation:fadeUp .8s .9s backwards}
+.platform-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.platform-logos{display:flex;align-items:center;gap:28px}
+.platform-logo-item{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:var(--text2);transition:color .18s}
+.platform-logo-item:hover{color:var(--text)}
+.platform-logo-item .yt{color:#ff0000}
+.platform-logo-item .ig{color:#e4405f}
+.platform-logo-item .tt{color:#fff}
+
+/* Avatar stack */
+.avatar-stack{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text2);margin-top:14px}
+.avatars{display:flex}
+.avatar-circle{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.avatar-circle:first-child{margin-left:0}
+.avatar-stack strong{color:var(--accent2)}
+
+/* Scroll arrow */
+.scroll-arrow{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text3);font-size:11px;letter-spacing:.1em;text-transform:uppercase;animation:bounce 2s ease-in-out infinite;z-index:10;-webkit-user-select:none;user-select:none}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.scroll-arrow svg{opacity:.4}
+
+/* ══════════ STATS BAND ══════════ */
+.stats-band{padding:60px 40px;background:linear-gradient(180deg,rgba(99,102,241,0.04) 0%,transparent 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.stat-item{text-align:center;padding:20px}
+.stat-icon{font-size:26px;margin-bottom:8px}
+.stat-number{font-family:var(--heading-font);font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#fff,var(--text2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:13px;color:var(--text3);margin-top:4px;font-weight:500}
+
+/* ══════════ SHARED SECTION STYLES ══════════ */
+section{position:relative;z-index:1}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;display:block}
+.section-heading{font-family:var(--heading-font);font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:14px}
+.section-sub{font-size:16px;color:var(--text2);line-height:1.7;max-width:560px}
+.container{max-width:1180px;margin:0 auto;padding:0 40px}
+.section-pad{padding:100px 0}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ══════════ APP PREVIEW ══════════ */
+.app-preview-section{padding:100px 0 0;overflow:hidden}
+.app-preview-header{text-align:center;margin-bottom:50px}
+.app-frame{max-width:1060px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid rgba(99,102,241,0.3);box-shadow:0 0 0 1px rgba(99,102,241,0.1),0 40px 120px rgba(99,102,241,0.2),0 0 60px rgba(99,102,241,0.1);position:relative}
+.app-frame-bar{height:42px;background:#0e0e1c;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:7px}
+.app-frame-dot{width:12px;height:12px;border-radius:50%}
+.app-frame-url{flex:1;margin:0 16px;height:24px;background:var(--surface);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:11px;color:var(--text3);gap:6px}
+.app-inner{display:grid;grid-template-columns:220px 280px 1fr;height:520px;background:var(--bg2)}
+
+/* Sidebar */
+.app-sidebar{border-right:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+.app-sidebar-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;font-size:12px;color:var(--text3);cursor:pointer;transition:all .15s}
+.app-sidebar-item.active{background:rgba(255,255,255,0.07);color:var(--text)}
+.app-sidebar-item:hover:not(.active){background:rgba(255,255,255,0.04);color:var(--text2)}
+.app-sidebar-section{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:12px 10px 4px}
+.credits-row{margin-top:auto;padding:10px;background:var(--surface);border-radius:8px;font-size:11px}
+.credits-label{color:var(--text3);margin-bottom:4px}
+.credits-bar{height:4px;background:var(--surface);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.credits-fill{width:60%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px}
+.credits-val{font-size:12px;font-weight:700;color:var(--text)}
+
+/* App center panel */
+.app-panel{border-right:1px solid var(--border);padding:16px;overflow-y:auto;font-size:12px}
+.app-panel-section{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.app-toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.app-toggle-label{font-size:12px;font-weight:600;color:var(--text2)}
+.app-toggle{width:40px;height:22px;background:var(--accent);border-radius:11px;position:relative;cursor:pointer}
+.app-toggle::after{content:'';position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+.caption-type{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.caption-type-btn{padding:7px;text-align:center;font-size:11px;cursor:pointer;transition:background .15s;color:var(--text2)}
+.caption-type-btn.active{background:rgba(255,255,255,0.08);color:var(--text)}
+.app-label{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.font-select{width:100%;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:7px;color:var(--text2);font-size:12px;margin-bottom:12px}
+.color-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.color-preview{width:24px;height:24px;border-radius:5px;background:#fff;border:1px solid var(--border2)}
+.slider-row{margin-bottom:12px}
+.slider-top{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px}
+.slider{width:100%;height:4px;background:var(--surface2);border-radius:4px;position:relative}
+.slider-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:4px;position:relative}
+.slider-fill::after{content:'';position:absolute;right:-6px;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px var(--accent)}
+.highlight-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.hl-btn{padding:6px;text-align:center;font-size:11px;color:var(--text3);cursor:pointer;transition:background .15s}
+.hl-btn.active{background:rgba(255,255,255,0.08);color:var(--text)}
+
+/* Video preview */
+.app-video{position:relative;display:flex;flex-direction:column}
+.app-video-frame{flex:1;background:linear-gradient(180deg,#1a2a3a,#0a1520);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.app-video-frame img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.video-bg{width:100%;height:100%;background:linear-gradient(135deg,#1e3a5f 0%,#2d5a8a 30%,#1a4a6e 60%,#0d2a40 100%);position:absolute;inset:0}
+.bridge-graphic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.bridge-graphic svg{width:100%;height:100%;opacity:.7}
+.play-btn{position:absolute;width:56px;height:56px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+.play-btn svg{margin-left:4px}
+.mute-btn{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px}
+.video-caption{position:absolute;bottom:30%;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.8)}
+.caption-highlight{color:#fbbf24}
+/* Timeline */
+.app-timeline{height:100px;background:#0a0a14;border-top:1px solid var(--border);padding:10px 12px}
+.timeline-bar{display:flex;align-items:center;gap:10px;font-size:10px;color:var(--text3);margin-bottom:6px}
+.timeline-track{flex:1;height:3px;background:var(--surface);border-radius:3px;position:relative}
+.timeline-progress{width:8%;height:100%;background:var(--accent);border-radius:3px}
+.timeline-thumbs{display:flex;gap:3px;height:50px}
+.timeline-thumb{flex:1;border-radius:4px;background:linear-gradient(135deg,#1e3a5f,#2d5a8a);overflow:hidden;position:relative;font-size:8px;color:rgba(255,255,255,0.4);display:flex;align-items:flex-end;padding:3px}
+
+/* Feature tabs below frame */
+.feature-tabs{display:flex;gap:0;justify-content:center;margin-top:0}
+.feature-tab{flex:1;max-width:320px;padding:18px 24px;background:var(--surface);border:1px solid var(--border);border-top:none;cursor:pointer;transition:all .2s;text-align:center}
+.feature-tab:first-child{border-radius:0 0 0 16px}
+.feature-tab:last-child{border-radius:0 0 16px 0}
+.feature-tab.active{background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.3)}
+.feature-tab-icon{font-size:20px;margin-bottom:6px}
+.feature-tab-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.feature-tab-sub{font-size:11px;color:var(--text3)}
+
+/* ══════════ HOW IT WORKS ══════════ */
+.how-section{padding:100px 0}
+.how-header{text-align:center;margin-bottom:60px}
+.steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.steps-row::before{content:'';position:absolute;top:48px;left:calc(16.66% + 20px);right:calc(16.66% + 20px);height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:0}
+.steps-row::after{content:'';position:absolute;top:44px;left:calc(16.66% + 16px);right:calc(16.66% + 16px);height:10px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.3),transparent);filter:blur(6px);z-index:0}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px 28px;text-align:center;transition:all .28s;position:relative;z-index:1}
+.step-card:hover{border-color:rgba(99,102,241,0.4);box-shadow:0 20px 60px rgba(99,102,241,0.12);transform:translateY(-6px)}
+.step-number{font-family:var(--heading-font);font-size:56px;font-weight:900;background:linear-gradient(135deg,rgba(99,102,241,0.5),rgba(129,140,248,0.2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:12px}
+.step-icon{font-size:28px;margin-bottom:14px}
+.step-title{font-family:var(--heading-font);font-size:20px;font-weight:700;margin-bottom:10px}
+.step-desc{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* ══════════ FEATURES BENTO ══════════ */
+.features-section{padding:100px 0}
+.features-header{text-align:center;margin-bottom:50px}
+.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:14px}
+.bento-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .28s;position:relative;overflow:hidden}
+.bento-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--card-color,rgba(99,102,241,0.05)),transparent);pointer-events:none;opacity:0;transition:opacity .3s}
+.bento-card:hover{transform:translateY(-4px);border-color:var(--card-color,rgba(99,102,241,0.3));box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+.bento-card:hover::before{opacity:1}
+.bento-card.large{grid-column:span 2}
+.bento-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;background:var(--card-icon-bg,rgba(99,102,241,0.12))}
+.bento-title{font-family:var(--heading-font);font-size:20px;font-weight:700;margin-bottom:8px}
+.bento-desc{font-size:13px;color:var(--text2);line-height:1.7}
+.bento-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;margin-top:14px;border:1px solid}
+
+/* ══════════ VIDEO SHOWCASE ══════════ */
+.showcase-section{padding:100px 0;overflow:hidden}
+.showcase-header{text-align:center;margin-bottom:50px}
+.phone-carousel{display:flex;gap:16px;animation:scrollCarousel 30s linear infinite;width:max-content}
+.phone-carousel:hover{animation-play-state:paused}
+@keyframes scrollCarousel{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.phone-card{width:170px;flex-shrink:0;border-radius:28px;overflow:hidden;border:3px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative;transition:transform .3s}
+.phone-card:hover{transform:scale(1.05) translateY(-8px)}
+.phone-card.tall{height:340px}
+.phone-card.short{height:280px;margin-top:30px}
+.phone-screen{width:100%;height:100%;position:relative;overflow:hidden}
+.phone-gradient{width:100%;height:100%;background:var(--g)}
+.phone-caption-overlay{position:absolute;bottom:0;left:0;right:0;padding:20px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,0.8))}
+.phone-title{font-family:var(--heading-font);font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.phone-views{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;background:rgba(0,0,0,0.7);font-size:11px;font-weight:700;color:#fff}
+.showcase-cta{margin:40px auto 0;max-width:700px;background:var(--surface);border:1px solid rgba(99,102,241,0.3);border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.showcase-cta-text{font-size:15px;font-weight:600}
+.showcase-cta-text span{color:var(--accent2)}
+
+/* ══════════ LETTER SECTION ══════════ */
+.letter-section{padding:100px 0}
+.letter-card{max-width:860px;margin:0 auto;background:var(--surface);border:1px solid var(--border2);border-radius:24px;overflow:hidden}
+.letter-dots{display:flex;gap:8px;justify-content:center;padding:20px 0 0}
+.letter-dot{width:32px;height:6px;border-radius:3px;background:var(--border2)}
+.letter-dot.active{background:var(--accent);width:48px}
+.letter-body{padding:40px 48px}
+.letter-heading{font-family:var(--heading-font);font-size:28px;font-weight:800;margin-bottom:20px}
+.letter-body p{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:16px}
+.letter-callout{background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:20px 24px;margin:20px 0;font-size:15px;font-weight:600;line-height:1.6;color:var(--text)}
+.letter-author{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid var(--border)}
+.letter-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--orange));display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0}
+.letter-author-name{font-size:14px;font-weight:700}
+.letter-author-role{font-size:12px;color:var(--text3)}
+/* ══════════ PROBLEM VS SOLUTION ══════════ */
+.pvs-section{padding:100px 0}
+.pvs-header{text-align:center;margin-bottom:50px}
+.pvs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.pvs-card{background:var(--surface);border-radius:20px;padding:32px;overflow:hidden}
+.pvs-card.problem{border:1px solid rgba(244,63,94,0.2);background:rgba(244,63,94,0.03)}
+.pvs-card.solution{border:1px solid rgba(34,211,165,0.2);background:rgba(34,211,165,0.03)}
+.pvs-card-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.pvs-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.pvs-icon.red{background:rgba(244,63,94,0.15)}
+.pvs-icon.green{background:rgba(34,211,165,0.12)}
+.pvs-title{font-family:var(--heading-font);font-size:18px;font-weight:700}
+.pvs-title.red{color:var(--red)}
+.pvs-title.green{color:var(--green)}
+.pvs-items{display:flex;flex-direction:column;gap:14px}
+.pvs-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--text2);line-height:1.5}
+.pvs-bullet{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px}
+.pvs-bullet.red{background:rgba(244,63,94,0.15);color:var(--red)}
+.pvs-bullet.green{background:rgba(34,211,165,0.12);color:var(--green)}
+.pvs-quote{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(249,115,22,0.05));border:1px solid rgba(99,102,241,0.2);border-radius:16px;padding:24px 32px;text-align:center;font-size:16px;font-weight:600;line-height:1.6;color:var(--text)}
+.pvs-quote::before{content:'"';font-size:48px;color:var(--accent);opacity:.4;font-family:Georgia,serif;line-height:0;vertical-align:-14px;margin-right:4px}
+
+/* ══════════ TESTIMONIALS ══════════ */
+.testimonials-section{padding:100px 0;overflow:hidden}
+.testimonials-header{text-align:center;margin-bottom:50px}
+.testimonials-track{display:flex;gap:16px;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.testimonials-viewport{overflow:hidden}
+.testimonial-card{min-width:340px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;flex-shrink:0;transition:all .2s}
+.testimonial-card:hover{border-color:rgba(99,102,241,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.test-stars{color:#fbbf24;font-size:13px;letter-spacing:2px;margin-bottom:12px}
+.test-quote{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:18px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.test-name{font-size:13px;font-weight:700}
+.test-handle{font-size:11px;color:var(--text3)}
+.test-platform{margin-left:auto;font-size:11px;padding:2px 8px;background:var(--surface);border:1px solid var(--border2);border-radius:20px;color:var(--text3)}
+.testimonials-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:30px}
+.test-nav-btn{width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .18s;font-size:14px}
+.test-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.test-dots{display:flex;gap:6px}
+.test-dot{width:6px;height:6px;border-radius:3px;background:var(--border2);transition:all .2s;cursor:pointer}
+.test-dot.active{background:var(--accent);width:20px}
+.rating-summary{text-align:center;margin-top:24px;font-size:14px;color:var(--text3)}
+.rating-summary strong{color:var(--text)}
+
+/* ══════════ RESULTS PROOF ══════════ */
+.results-section{padding:100px 0}
+.results-header{text-align:center;margin-bottom:40px}
+.results-big{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:800px;margin:0 auto 24px}
+.result-box{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px 32px;text-align:center;font-family:var(--heading-font);font-size:22px;font-weight:700;transition:all .2s}
+.result-box:hover{border-color:rgba(99,102,241,0.3);box-shadow:0 12px 40px rgba(99,102,241,0.1)}
+.results-mini{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.mini-pill{padding:7px 16px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:20px;font-size:12px;font-weight:600;color:var(--accent2)}
+.disclaimer{text-align:center;font-size:11px;color:var(--text3);max-width:600px;margin:0 auto}
+
+/* ══════════ PRICING ══════════ */
+.pricing-section{padding:100px 0}
+.pricing-header{text-align:center;margin-bottom:40px}
+.billing-toggle{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:40px}
+.billing-label{font-size:14px;font-weight:600;color:var(--text2);cursor:pointer;transition:color .18s}
+.billing-label.active{color:var(--text)}
+.toggle-switch{width:48px;height:26px;background:var(--accent);border-radius:13px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.toggle-switch-thumb{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.toggle-switch.monthly .toggle-switch-thumb{transform:translateX(-22px)}
+.savings-badge{padding:3px 10px;background:rgba(34,211,165,0.12);border:1px solid rgba(34,211,165,0.25);border-radius:20px;font-size:11px;font-weight:700;color:var(--green)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;transition:all .28s;overflow:hidden}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 24px 70px rgba(0,0,0,0.3)}
+.price-card.popular{border-color:rgba(99,102,241,0.5);box-shadow:0 0 0 1px rgba(99,102,241,0.2),0 20px 60px rgba(99,102,241,0.15)}
+.price-card.popular::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.popular-badge{position:absolute;top:16px;right:16px;padding:4px 12px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:20px;font-size:10px;font-weight:800;color:#fff;letter-spacing:.04em}
+.limited-badge{display:inline-flex;padding:3px 9px;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.2);border-radius:20px;font-size:10px;font-weight:700;color:var(--red);margin-bottom:10px}
+.price-plan{font-family:var(--heading-font);font-size:22px;font-weight:800;margin-bottom:4px}
+.price-for{font-size:12px;color:var(--text3);margin-bottom:16px}
+.price-amount{display:flex;align-items:flex-start;gap:4px;margin-bottom:4px}
+.price-old{font-size:18px;color:var(--text3);text-decoration:line-through;margin-top:4px}
+.price-new{font-family:var(--heading-font);font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1}
+.price-period{font-size:13px;color:var(--text3);margin-top:8px}
+.price-billed{font-size:11px;color:var(--text3);margin-bottom:20px}
+.price-subscribe{width:100%;padding:13px;border-radius:12px;font-family:var(--body-font);font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;margin-bottom:20px;border:none}
+.price-subscribe.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+.price-subscribe.primary:hover{box-shadow:0 8px 30px rgba(99,102,241,0.5);transform:translateY(-1px)}
+.price-subscribe.secondary{background:var(--surface);border:1px solid var(--border2);color:var(--text)}
+.price-subscribe.secondary:hover{border-color:var(--border2);background:rgba(255,255,255,0.05)}
+.price-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--surface);border:1px solid var(--border2);border-radius:8px;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.price-divider{height:1px;background:var(--border);margin:16px 0}
+.price-features-label{font-size:12px;font-weight:700;margin-bottom:12px;color:var(--text2)}
+.price-features{display:flex;flex-direction:column;gap:9px}
+.price-feature{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text2)}
+.feature-check{width:18px;height:18px;border-radius:5px;background:rgba(34,211,165,0.12);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--green);flex-shrink:0;margin-top:1px}
+.pricing-trust{display:flex;gap:24px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text3);font-weight:500}
+.trust-icon{font-size:16px}
+  <div class="stats-grid">
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-icon">📈</div>
+      <div class="stat-number">2M+</div>
+      <div class="stat-label">Reels Generated</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-icon">👥</div>
+      <div class="stat-number" id="count1">50,000</div>
+      <div class="stat-label">Active Creators</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-number">99.9%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-4">
+      <div class="stat-icon">💸</div>
+      <div class="stat-number">$<span id="count2">14</span>M+</div>
+      <div class="stat-label">Creator Earnings</div>
+    </div>
+  </div>
+</div>
+
+<!-- App Preview Section -->
+<section class="app-preview-section">
+  <div class="container">
+    <div class="app-preview-header reveal">
+      <span class="section-label">Inside The Platform</span>
+      <h2 class="section-heading">Your entirely automated content engine.</h2>
+      <p class="section-sub" style="margin:0 auto">We packed a full video editing timeline, auto-caption engine, and scheduling calendar into an interface that takes 2 minutes to learn.</p>
+    </div>
+
+    <div class="app-frame reveal reveal-delay-2">
+      <div class="app-frame-bar">
+        <div style="display:flex;gap:6px">
+          <div class="app-frame-dot" style="background:#f43f5e"></div>
+          <div class="app-frame-dot" style="background:#fbbf24"></div>
+          <div class="app-frame-dot" style="background:#22d3a5"></div>
+        </div>
+        <div class="app-frame-url">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          app.autoreel.ai/editor
+        </div>
+      </div>
+      <div class="app-inner">
+        <!-- Sidebar -->
+        <div class="app-sidebar">
+          <div class="app-sidebar-section">Menu</div>
+          <div class="app-sidebar-item"><span style="font-size:14px">🏠</span> Dashboard</div>
+          <div class="app-sidebar-item active"><span style="font-size:14px">⚡</span> Create Reel</div>
+          <div class="app-sidebar-item"><span style="font-size:14px">📚</span> My Videos</div>
+          <div class="app-sidebar-item"><span style="font-size:14px">📅</span> Scheduler</div>
+          <div class="app-sidebar-item"><span style="font-size:14px">📊</span> Analytics</div>
+          
+          <div class="app-sidebar-section" style="margin-top:12px">Integrations</div>
+          <div class="app-sidebar-item"><span style="color:#ff0000;font-size:14px">▶</span> YouTube</div>
+          <div class="app-sidebar-item"><span style="color:#fff;font-size:14px">♪</span> TikTok</div>
+          <div class="app-sidebar-item"><span style="color:#e4405f;font-size:14px">◎</span> Instagram</div>
+
+          <div class="credits-row">
+            <div class="credits-label">Pro Plan</div>
+            <div class="credits-bar"><div class="credits-fill"></div></div>
+            <div style="display:flex;justify-content:space-between">
+              <span>Remaining</span>
+              <span class="credits-val">60 / 100</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="app-panel">
+          <div class="app-panel-section">Video Generation</div>
+          
+          <div class="app-toggle-row">
+            <div class="app-toggle-label">Auto-generate Script</div>
+            <div class="app-toggle" style="background:var(--accent)"></div>
+          </div>
+          <div class="app-toggle-row">
+            <div class="app-toggle-label">Viral Hooks Mode</div>
+            <div class="app-toggle" style="background:var(--accent)"></div>
+          </div>
+
+          <div class="app-panel-section" style="margin-top:20px">Captions Style</div>
+          
+          <div class="caption-type">
+            <div class="caption-type-btn active">Alex Hormozi</div>
+            <div class="caption-type-btn">MrBeast</div>
+            <div class="caption-type-btn">Ali Abdaal</div>
+            <div class="caption-type-btn">Minimal</div>
+          </div>
+
+          <div class="app-label">Font Family</div>
+          <select class="font-select">
+            <option>Bricolage Grotesque</option>
+            <option>Montserrat</option>
+            <option>Proxima Nova</option>
+          </select>
+
+          <div class="app-label">Highlight Colors</div>
+          <div class="color-row">
+            <div class="color-preview" style="background:#fbbf24"></div>
+            <div class="color-preview" style="background:#22d3a5"></div>
+            <div class="color-preview" style="background:#f43f5e"></div>
+            <div class="color-preview" style="background:#6366f1"></div>
+            <div class="color-preview" style="background:#f0f0fa;border-color:#333"></div>
+          </div>
+
+          <div class="app-label">Animation</div>
+          <div class="highlight-btns">
+            <div class="hl-btn">Pop</div>
+            <div class="hl-btn active">Scale</div>
+            <div class="hl-btn">Fade</div>
+          </div>
+        </div>
+
+        <!-- Video Preview -->
+        <div class="app-video">
+          <div class="app-video-frame">
+            <div class="video-bg"></div>
+            <div class="bridge-graphic">
+              <!-- Animated graphic representation of a video -->
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.1)" stroke-width="40" stroke-dasharray="10 20"/>
+                <circle cx="100" cy="100" r="40" fill="rgba(99,102,241,0.2)"/>
+              </svg>
+            </div>
+            
+            <div class="mute-btn">🔇</div>
+            <div class="video-caption">
+              Create <span class="caption-highlight">Viral Shorts</span> In Seconds.
+            </div>
+            
+            <div class="play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#0e0e1c"><path d="M5 3l14 9-14 9V3z"/></svg>
+            </div>
+          </div>
+          
+          <div class="app-timeline">
+            <div class="timeline-bar">
+              <span>0:00</span>
+              <div class="timeline-track">
+                <div class="timeline-progress"></div>
+              </div>
+              <span>0:45</span>
+            </div>
+            
+            <div style="font-size:10px;color:var(--text3);margin-bottom:4px">Visuals</div>
+            <div class="timeline-thumbs">
+              <div class="timeline-thumb" style="background:url('https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=100&q=80') center/cover">Intro</div>
+              <div class="timeline-thumb" style="background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&q=80') center/cover">Data</div>
+              <div class="timeline-thumb" style="background:url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=100&q=80') center/cover">Chart</div>
+              <div class="timeline-thumb" style="background:url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&q=80') center/cover">Growth</div>
+              <div class="timeline-thumb" style="background:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&q=80') center/cover">Phone</div>
+              <div class="timeline-thumb" style="background:url('https://images.unsplash.com/photo-1553484771-371a605b060b?w=100&q=80') center/cover">Stats</div>
+            </div>
+            
+            <div style="font-size:10px;color:var(--text3);margin:4px 0">Audio Track</div>
+            <div style="height:12px;background:rgba(99,102,241,0.15);border-radius:2px;border:1px solid rgba(99,102,241,0.3);display:flex;align-items:center;padding:0 4px;overflow:hidden">
+              <svg width="100%" height="8" preserveAspectRatio="none"><path d="M0,4 Q5,0 10,4 T20,4 T30,4 T40,4 T50,4 T60,4 T70,4 T80,4" fill="none" stroke="rgba(99,102,241,0.8)" stroke-width="1"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="feature-tabs reveal reveal-delay-3" style="max-width:1060px;margin:0 auto">
+      <div class="feature-tab active">
+        <div class="feature-tab-icon">🎭</div>
+        <div class="feature-tab-title">AI Video Editing</div>
+      </div>
+      <div class="feature-tab">
+        <div class="feature-tab-icon">📝</div>
+        <div class="feature-tab-title">Viral Scriptwriter</div>
+      </div>
+      <div class="feature-tab">
+        <div class="feature-tab-icon">🗣️</div>
+        <div class="feature-tab-title">Voice Cloning</div>
+      </div>
+      <div class="feature-tab">
+        <div class="feature-tab-icon">🚀</div>
+        <div class="feature-tab-title">Autopilot Posting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="how-header reveal">
+      <span class="section-label">The Process</span>
+      <h2 class="section-heading">From idea to viral video in 3 steps.</h2>
+    </div>
+    <div class="steps-row">
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-number">1</div>
+        <div class="step-icon">💡</div>
+        <div class="step-title">Enter a Topic</div>
+        <div class="step-desc">Type a single prompt like "Stoic quotes for discipline" or drop a link to your blog post.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-number">2</div>
+        <div class="step-icon">🤖</div>
+        <div class="step-title">AI Generates</div>
+        <div class="step-desc">Our engine writes a hook, clones a voice, adds B-roll, styles captions, and mixes audio.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-number">3</div>
+        <div class="step-icon">🚀</div>
+        <div class="step-title">Auto-Post</div>
+        <div class="step-desc">The completed video is scheduled and published directly to TikTok, YT Shorts, and Instagram.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Bento -->
+<section class="features-section">
+  <div class="container">
+    <div class="features-header reveal">
+      <span class="section-label">Platform Features</span>
+      <h2 class="section-heading">Everything you need to grow on autopilot.</h2>
+    </div>
+    
+    <div class="bento-grid">
+      <div class="bento-card large reveal reveal-delay-1" style="--card-color:rgba(99,102,241,0.2)">
+        <div class="bento-icon" style="--card-icon-bg:rgba(99,102,241,0.15);color:var(--accent2)">✍️</div>
+        <h3 class="bento-title">Viral Script Generation</h3>
+        <p class="bento-desc">Trained on millions of leading short-form videos. It automatically generates high-retention hooks, compelling pacing, and call-to-actions.</p>
+        <div class="bento-tag" style="border-color:rgba(99,102,241,0.3);color:var(--accent2)">GPT-4 Powered</div>
+      </div>
+      
+      <div class="bento-card reveal reveal-delay-2" style="--card-color:rgba(34,211,165,0.2)">
+        <div class="bento-icon" style="--card-icon-bg:rgba(34,211,165,0.15);color:var(--green)">🗣️</div>
+        <h3 class="bento-title">Hyper-Realistic Voices</h3>
+        <p class="bento-desc">Access 120+ emotional AI voices or clone your own with just 30 seconds of audio.</p>
+        <div class="bento-tag" style="border-color:rgba(34,211,165,0.3);color:var(--green)">11Labs Integration</div>
+      </div>
+      
+      <div class="bento-card reveal reveal-delay-1" style="--card-color:rgba(249,115,22,0.2)">
+        <div class="bento-icon" style="--card-icon-bg:rgba(249,115,22,0.15);color:var(--orange)">🎬</div>
+        <h3 class="bento-title">Smart B-Roll Sourcing</h3>
+        <p class="bento-desc">Automatically pairs script context with premium stock video backgrounds.</p>
+      </div>
+      
+      <div class="bento-card reveal reveal-delay-2" style="--card-color:rgba(244,63,94,0.2)">
+        <div class="bento-icon" style="--card-icon-bg:rgba(244,63,94,0.15);color:var(--red)">✨</div>
+        <h3 class="bento-title">Dynamic Captions</h3>
+        <p class="bento-desc">Hormozi-style animated text with emojis and word-level highlighting.</p>
+      </div>
+      
+      <div class="bento-card reveal reveal-delay-3" style="--card-color:rgba(167,139,250,0.2)">
+        <div class="bento-icon" style="--card-icon-bg:rgba(167,139,250,0.15);color:#a78bfa">📅</div>
+        <h3 class="bento-title">Auto-Scheduler</h3>
+        <p class="bento-desc">Set it and forget it. Queue up months of content to post automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Showcase -->
+<section class="showcase-section" id="demo">
+  <div class="showcase-header reveal">
+    <span class="section-label">Showcase</span>
+    <h2 class="section-heading">Created with AutoReel.AI.</h2>
+    <p class="section-sub" style="margin:0 auto">See real videos generated by our platform that are printing views and followers.</p>
+  </div>
+  
+  <div class="phone-carousel reveal reveal-delay-2">
+    <!-- Duplicate blocks for infinite scroll effect -->
+    <!-- Block 1 -->
+    <div class="phone-card tall">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#4f46e5,#3b82f6)"></div>
+        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Motivation / Finance</div>
+          <div class="phone-views">▶ 2.4M Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card short">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#f59e0b,#ea580c)"></div>
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Stoicism</div>
+          <div class="phone-views">▶ 890K Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card tall" style="margin-top:20px">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#10b981,#059669)"></div>
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Fitness</div>
+          <div class="phone-views">▶ 1.2M Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card short" style="margin-top:10px">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#ec4899,#db2777)"></div>
+        <img src="https://images.unsplash.com/photo-1512412046714-3d7560e653da?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Pop Culture</div>
+          <div class="phone-views">▶ 4.1M Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card tall">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#8b5cf6,#6366f1)"></div>
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Tech Facts</div>
+          <div class="phone-views">▶ 650K Views</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Block 2 (Duplicate) -->
+    <div class="phone-card tall">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#4f46e5,#3b82f6)"></div>
+        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Motivation / Finance</div>
+          <div class="phone-views">▶ 2.4M Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card short">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#f59e0b,#ea580c)"></div>
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Stoicism</div>
+          <div class="phone-views">▶ 890K Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card tall" style="margin-top:20px">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#10b981,#059669)"></div>
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Fitness</div>
+          <div class="phone-views">▶ 1.2M Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card short" style="margin-top:10px">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#ec4899,#db2777)"></div>
+        <img src="https://images.unsplash.com/photo-1512412046714-3d7560e653da?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Pop Culture</div>
+          <div class="phone-views">▶ 4.1M Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-card tall">
+      <div class="phone-screen">
+        <div class="phone-gradient" style="--g:linear-gradient(135deg,#8b5cf6,#6366f1)"></div>
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.6">
+        <div class="phone-caption-overlay">
+          <div class="phone-title">Tech Facts</div>
+          <div class="phone-views">▶ 650K Views</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="showcase-cta reveal reveal-delay-3">
+      <div class="showcase-cta-text">Every video includes copyright-free assets and is <span>monitization-ready.</span></div>
+      <a href="#" class="btn-primary" style="padding:10px 20px;font-size:13px">Start Generating</a>
+    </div>
+  </div>
+</section>
+
+<!-- Letter Section -->
+<!-- Letter Section -->
+<section class="letter-section">
+  <div class="container">
+    <div class="letter-card reveal reveal-delay-2">
+      <div class="letter-dots">
+        <div class="letter-dot active"></div>
+        <div class="letter-dot"></div>
+        <div class="letter-dot"></div>
+      </div>
+      <div class="letter-body">
+        <h2 class="letter-heading">Why we built AutoReel.AI.</h2>
+        <p>Short-form content is the highest leverage asset on the internet right now. But creating it daily is a nightmare. You have to write scripts, record voiceovers (or pay actors), source B-roll, edit for hours, add captions, and manually upload to three different platforms.</p>
+        <p>Most creators burn out after two weeks. We built AutoReel.AI to remove the friction.</p>
+        <div class="letter-callout">
+          "Our goal was simple: What if you could build an entire media empire without ever showing your face or opening Premiere Pro?"
+        </div>
+        <p>With AutoReel.AI, you can manage 5+ niche faceless channels that generate millions of views and passive income—all while you sleep.</p>
+        
+        <div class="letter-author">
+          <div class="letter-avatar">J</div>
+          <div>
+            <div class="letter-author-name">James Carter</div>
+            <div class="letter-author-role">Founder, AutoReel.AI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem vs Solution -->
+<section class="pvs-section">
+  <div class="container">
+    <div class="pvs-header reveal">
+      <h2 class="section-heading">The old way vs. The AutoReel way.</h2>
+    </div>
+    
+    <div class="pvs-grid">
+      <!-- Problem -->
+      <div class="pvs-card problem reveal reveal-delay-1">
+        <div class="pvs-card-head">
+          <div class="pvs-icon red">✕</div>
+          <h3 class="pvs-title red">The Old Way</h3>
+        </div>
+        <div class="pvs-items">
+          <div class="pvs-item">
+            <div class="pvs-bullet red">✕</div>
+            <span>Hire expensive scriptwriters ($50/script)</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet red">✕</div>
+            <span>Pay for voiceover artists ($100/video)</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet red">✕</div>
+            <span>Spend hours editing in Premiere or CapCut</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet red">✕</div>
+            <span>Manually upload and add tags to TikTok, YT, and IG</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet red">✕</div>
+            <span>Manage multiple expensive software subscriptions</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Solution -->
+      <div class="pvs-card solution reveal reveal-delay-2">
+        <div class="pvs-card-head">
+          <div class="pvs-icon green">✓</div>
+          <h3 class="pvs-title green">The AutoReel.AI Way</h3>
+        </div>
+        <div class="pvs-items">
+          <div class="pvs-item">
+            <div class="pvs-bullet green">✓</div>
+            <span>AI writes viral scripts proven to retain viewers</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet green">✓</div>
+            <span>120+ Hyper-realistic premium AI voices included</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet green">✓</div>
+            <span>B-roll, captions, and transitions applied instantly</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet green">✓</div>
+            <span>Auto-scheduled and published to all platforms</span>
+          </div>
+          <div class="pvs-item">
+            <div class="pvs-bullet green">✓</div>
+            <span>One simple monthly subscription.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pvs-quote reveal reveal-delay-3">
+      Stop working IN your content business. Start working ON it.
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <span class="section-label">Wall of Love</span>
+      <h2 class="section-heading">Join 50,000+ creators winning.</h2>
+    </div>
+    
+    <div class="testimonials-viewport reveal reveal-delay-2">
+      <div class="testimonials-track" id="testTrack">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"I run a motivation channel on TikTok. Before AutoReel, I was posting 1 video a day and burning out. Now I schedule 5 videos a day in 10 minutes. Hit 100k followers last week."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+            <div>
+              <div class="test-name">Sarah Jenkins</div>
+              <div class="test-handle">@stoicmindset</div>
+            </div>
+            <div class="test-platform">TikTok</div>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"The voice cloning feature is insane. It uses my actual voice perfectly synced with AI generated scripts. My audience literally cannot tell the difference."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&q=80" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+            <div>
+              <div class="test-name">Marcus Reed</div>
+              <div class="test-handle">@marcustech</div>
+            </div>
+            <div class="test-platform">YouTube</div>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"I canceled my ChatGPT Plus, ElevenLabs, and CapCut Pro subscriptions. AutoReel does it all in one platform and the results are honestly way better for faceless channels."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+            <div>
+              <div class="test-name">Elena Rodriguez</div>
+              <div class="test-handle">@financefacts</div>
+            </div>
+            <div class="test-platform">Instagram</div>
+          </div>
+        </div>
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"The auto-posting is the best part. I spend Sunday evening generating 30 videos, and they just drip out automatically across my 3 channels for the rest of the week."</p>
+          <div class="test-author">
+           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+            <div>
+              <div class="test-name">David Chen</div>
+              <div class="test-handle">@historyunveiled</div>
+            </div>
+            <div class="test-platform">TikTok</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonials-nav reveal reveal-delay-3">
+      <button class="test-nav-btn" id="testPrev">←</button>
+      <div class="test-dots" id="testDots">
+        <div class="test-dot active" data-idx="0"></div>
+        <div class="test-dot" data-idx="1"></div>
+        <div class="test-dot" data-idx="2"></div>
+        <div class="test-dot" data-idx="3"></div>
+      </div>
+      <button class="test-nav-btn" id="testNext">→</button>
+    </div>
+    
+    <div class="rating-summary reveal reveal-delay-4">
+      Rated <strong>4.8/5</strong> based on over 500+ reviews
+    </div>
+  </div>
+</section>
+
+<!-- Results Proof -->
+<section class="results-section">
+  <div class="container">
+    <div class="results-header reveal">
+      <span class="section-label">Real Results</span>
+      <h2 class="section-heading">Monetization Ready.</h2>
+    </div>
+    
+    <div class="results-big">
+      <div class="result-box reveal reveal-delay-1">
+        64% Better<br>
+        <span style="font-size:14px;color:var(--text3);font-weight:500;font-family:var(--body-font)">Average Watch Time</span>
+      </div>
+      <div class="result-box reveal reveal-delay-2">
+        Zero<br>
+        <span style="font-size:14px;color:var(--text3);font-weight:500;font-family:var(--body-font)">Copyright Strikes Reported</span>
+      </div>
+    </div>
+    
+    <div class="results-mini reveal reveal-delay-3">
+      <div class="mini-pill">100% Original Scripts</div>
+      <div class="mini-pill">Commercially Cleared Assets</div>
+      <div class="mini-pill">Monetization Compliant</div>
+    </div>
+    
+    <p class="disclaimer reveal reveal-delay-4">Results vary by niche and consistency. AutoReel.AI provides the tools and optimized content, but creators must adhere to platform specific partner program requirements.</p>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="pricing-header reveal">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-heading">Simple, transparent pricing.</h2>
+      <p class="section-sub" style="margin:0 auto">Start generating your video empire today. Cancel anytime.</p>
+    </div>
+    
+    <div class="billing-toggle reveal reveal-delay-1">
+      <span class="billing-label active" id="billMonthly">Monthly</span>
+      <div class="toggle-switch monthly" id="billToggle">
+        <div class="toggle-switch-thumb"></div>
+      </div>
+      <span class="billing-label" id="billYearly">Yearly</span>
+      <span class="savings-badge">Save 20%</span>
+    </div>
+    
+    <div class="pricing-grid">
+      <!-- Plan 1 -->
+      <div class="price-card reveal reveal-delay-1">
+        <h3 class="price-plan">Starter</h3>
+        <p class="price-for">For testing the waters.</p>
+        <div class="price-amount">
+          <span style="font-size:24px;font-weight:700;margin-top:4px">$</span>
+          <span class="price-new" data-monthly="29" data-yearly="24">29</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-billed">Billed monthly</div>
+        
+        <button class="price-subscribe secondary">Start Free Trial</button>
+        
+        <div class="price-chip">30 AI Videos / month</div>
+        <div class="price-divider"></div>
+        
+        <div class="price-features-label">WHAT'S INCLUDED:</div>
+        <div class="price-features">
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Auto-Script Generation</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>20 Standard AI Voices</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Basic B-Roll Library</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>720p Export</span>
+          </div>
+          <div class="price-feature" style="opacity:.6">
+            <div class="feature-check" style="background:transparent;border:1px solid var(--border);color:var(--text3)">✕</div>
+            <span>Auto-Posting</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Plan 2 -->
+      <div class="price-card popular reveal reveal-delay-2">
+        <div class="popular-badge">MOST POPULAR</div>
+        <h3 class="price-plan">Creator Pro</h3>
+        <p class="price-for">For serious channel owners.</p>
+        <div class="price-amount">
+          <span style="font-size:24px;font-weight:700;margin-top:4px">$</span>
+          <span class="price-old" style="display:none" data-monthly="0" data-yearly="99">99</span>
+          <span class="price-new" data-monthly="99" data-yearly="79">99</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-billed" style="color:var(--accent2)">Billed monthly</div>
+        
+        <button class="price-subscribe primary">Start 7-Day Free Trial</button>
+        
+        <div class="price-chip" style="background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.3);color:var(--accent2)">150 AI Videos / month</div>
+        <div class="price-divider"></div>
+        
+        <div class="price-features-label">EVERYTHING IN STARTER, PLUS:</div>
+        <div class="price-features">
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Premium 11Labs Voices</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Voice Cloning (3 voices)</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Multi-platform Auto-posting</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>1080p Export</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>AutoReel Watermark Removed</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Plan 3 -->
+      <div class="price-card reveal reveal-delay-3">
+        <h3 class="price-plan">Agency</h3>
+        <p class="price-for">For scaling multiple brands.</p>
+        <div class="price-amount">
+          <span style="font-size:24px;font-weight:700;margin-top:4px">$</span>
+          <span class="price-new" data-monthly="249" data-yearly="199">249</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-billed">Billed monthly</div>
+        
+        <button class="price-subscribe secondary">Get Agency Access</button>
+        
+        <div class="price-chip">Unlimited Videos*</div>
+        <div class="price-divider"></div>
+        
+        <div class="price-features-label">EVERYTHING IN PRO, PLUS:</div>
+        <div class="price-features">
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>API Access</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Custom Webhooks</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Team Workspaces (5 seats)</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>4k Export</span>
+          </div>
+          <div class="price-feature">
+            <div class="feature-check">✓</div>
+            <span>Dedicated Success Manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pricing-trust reveal reveal-delay-4">
+      <div class="trust-item"><span class="trust-icon">🔒</span> Secure Payment via Stripe</div>
+      <div class="trust-item"><span class="trust-icon">⏱️</span> Setup in 2 minutes</div>
+      <div class="trust-item"><span class="trust-icon">📅</span> Cancel anytime</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <span class="section-label">Questions</span>
+      <h2 class="section-heading">Frequently Asked Questions</h2>
+    </div>
+    
+    <div class="faq-list reveal reveal-delay-2">
+      <div class="faq-item">
+        <div class="faq-question">
+          How long does it take to generate a video?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            A standard 60-second short takes about 90 seconds to generate completely. This includes scriptwriting, voiceover generation, clip sourcing, and rendering the final file with captions.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I use my own voice?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Yes, on the Creator Pro plan and above, you can upload a 30-second clean audio sample of your voice, and our integration with ElevenLabs will create a hyper-realistic clone you can use across all your videos.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Will YouTube monetize these AI videos?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Yes. YouTube's policies allow for AI-generated content as long as it provides value, is transformative, and doesn't spam similar content. By using our dynamic scripting and unique B-roll combinations, your videos remain highly unique and eligible for the YouTube Partner Program.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I review the video before it posts?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Absolutely. You have full edit control. You can generate a draft, watch it, change the script, swap B-roll clips, adjust the caption style, and then either schedule it or post it immediately.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="reveal">
+      <div class="cta-badge-row">
+        <span>Limited Offer</span>
+        <span style="width:1px;height:12px;background:var(--border2)"></span>
+        <span style="color:#fbbf24">★★★★★</span>
+      </div>
+      <h2 class="cta-heading">Ready to put your content<br><span class="gradient-text">on autopilot?</span></h2>
+      <p class="cta-sub">Join 50,000+ creators and agencies who are building faceless empires with AutoReel.AI. Start your 7-day free trial today.</p>
+      
+      <div class="cta-btn-wrap">
+        <a href="#pricing" class="btn-primary" style="padding:16px 40px;font-size:16px">✦ Get Started for Free</a>
+      </div>
+      
+      <div class="cta-trust">
+        <div class="cta-trust-item">✓ 7-Day Free Trial</div>
+        <div class="cta-trust-item">✓ Cancel Anytime</div>
+        <div class="cta-trust-item">✓ No Credit Card Required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <div class="nav-logo-mark">▶</div>
+          AutoReel<span>.AI</span>
+        </a>
+        <p class="footer-tagline">Building the world's most advanced AI content engine for faceless creators and agencies. Dominating short-form has never been this easy.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">IG</a>
+          <a href="#" class="social-btn">YT</a>
+          <a href="#" class="social-btn">TT</a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-col-title">Product</h4>
+        <div class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#demo">Demo</a>
+          <a href="#">Release Notes</a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-col-title">Company</h4>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Affiliates</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-col-title">Resources</h4>
+        <div class="footer-links">
+          <a href="#">Documentation</a>
+          <a href="#">API Reference</a>
+          <a href="#">Creator Blog</a>
+          <a href="#">Help Center</a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-col-title">Legal</h4>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 AutoReel AI. All rights reserved.</div>
+      <div class="footer-made">Built with ❤️ for Creators.</div>
+      <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+    </div>
+    
+    <p class="footer-legal">Disclaimer: YouTube, Instagram, and TikTok are trademarks of their respective owners. AutoReel.AI is not affiliated with or endorsed by these platforms. Creator results shown are representative of highly active users and are not guaranteed earnings. Use AI responsibly.</p>
+  </div>
+</footer>
+
+<script>
+// 1. Custom Cursor
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+
+document.addEventListener('mousemove', (e) => {
+  const { clientX, clientY } = e;
+  cursor.style.left = clientX + 'px';
+  cursor.style.top = clientY + 'px';
+  
+  cursorRing.style.left = clientX + 'px';
+  cursorRing.style.top = clientY + 'px';
+});
+
+document.addEventListener('mousedown', () => {
+  cursorRing.style.width = '24px';
+  cursorRing.style.height = '24px';
+  cursorRing.style.borderWidth = '4px';
+});
+
+document.addEventListener('mouseup', () => {
+  cursorRing.style.width = '36px';
+  cursorRing.style.height = '36px';
+  cursorRing.style.borderWidth = '1.5px';
+});
+
+// 2. Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// 3. Mobile Nav Toggle
+function toggleMobileNav() {
+  const overlay = document.getElementById('mobileOverlay');
+  overlay.classList.toggle('open');
+}
+
+// 4. Typewriter Effect
+const words = ["AI-generated Videos", "TikTok Reels", "YouTube Shorts", "Instagram Reels"];
+let wordIdx = 0;
+let charIdx = 0;
+let isDeleting = false;
+const typewriterEl = document.getElementById('typewriter');
+
+function type() {
+  const currentWord = words[wordIdx];
+  const typeSpeed = isDeleting ? 50 : 100;
+
+  if (isDeleting) {
+    typewriterEl.textContent = currentWord.substring(0, charIdx - 1);
+    charIdx--;
+  } else {
+    typewriterEl.textContent = currentWord.substring(0, charIdx + 1);
+    charIdx++;
+  }
+
+  if (!isDeleting && charIdx === currentWord.length) {
+    isDeleting = true;
+    setTimeout(type, 2000);
+  } else if (isDeleting && charIdx === 0) {
+    isDeleting = false;
+    wordIdx = (wordIdx + 1) % words.length;
+    setTimeout(type, 500);
+  } else {
+    setTimeout(type, typeSpeed);
+  }
+}
+type();
+
+// 5. Stats Counter
+const stats = document.querySelectorAll('.stat-number');
+const obsOptions = { threshold: 0.5 };
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = entry.target;
+      if (target.id === 'count1') animateCount(target, 50000, 'K+');
+      else if (target.id === 'count2') animateCount(target, 14, 'M+');
+      statsObserver.unobserve(target);
+    }
+  });
+}, obsOptions);
+
+stats.forEach(s => statsObserver.observe(s));
+
+function animateCount(el, target, suffix) {
+  let current = 0;
+  const steps = 60;
+  const increment = target / steps;
+  let timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      el.textContent = Math.floor(target).toLocaleString() + suffix;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(current).toLocaleString() + suffix;
+    }
+  }, 30);
+}
+
+// 6. Reveal Animations
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// 7. App Preview Tab Switching
+const featureTabs = document.querySelectorAll('.feature-tab');
+featureTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    featureTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// 8. Testimonials Carousel
+const track = document.getElementById('testTrack');
+const dots = document.querySelectorAll('.test-dot');
+const nextBtn = document.getElementById('testNext');
+const prevBtn = document.getElementById('testPrev');
+let currentSlide = 0;
+
+function updateTestimonials() {
+  const cardWidth = 356; // card width + margin
+  track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+  dots.forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide);
+  });
+}
+
+nextBtn?.addEventListener('click', () => {
+  currentSlide = (currentSlide + 1) % dots.length;
+  updateTestimonials();
+});
+
+prevBtn?.addEventListener('click', () => {
+  currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+  updateTestimonials();
+});
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    currentSlide = parseInt(dot.getAttribute('data-idx'));
+    updateTestimonials();
+  });
+});
+
+// 9. Pricing Toggle
+const billToggle = document.getElementById('billToggle');
+const prices = document.querySelectorAll('.price-new');
+const monthlyLabel = document.getElementById('billMonthly');
+const yearlyLabel = document.getElementById('billYearly');
+
+billToggle.addEventListener('click', () => {
+  const isMonthly = billToggle.classList.contains('monthly');
+  billToggle.classList.toggle('monthly');
+  monthlyLabel.classList.toggle('active');
+  yearlyLabel.classList.toggle('active');
+
+  prices.forEach(p => {
+    p.textContent = isMonthly ? p.getAttribute('data-yearly') : p.getAttribute('data-monthly');
+  });
+});
+
+// 10. FAQ Accordion
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', () => {
+    const wasOpen = item.classList.contains('open');
+    faqItems.forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+<style>
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta, .nav-right, .github-badge { display: none !important; }
+  .hamburger { display: flex !important; }
+  
+  .hero { padding: 100px 20px 40px; }
+  .hero-title { font-size: 42px !important; letter-spacing: -1px; }
+  .hero-sub { font-size: 16px; }
+  .hero-btns { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+  
+  .stats-grid, .steps-row, .features-grid, .comparison-grid, .pricing-grid, .founders-row, .footer-grid, .bento-grid, .results-big, .results-mini {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .app-inner { display: flex; flex-direction: column; height: auto !important; }
+  .app-sidebar { display: none; }
+  .app-panel { border-right: none; border-bottom: 1px solid var(--border); }
+  .app-video-frame { min-height: 250px; }
+  .feature-tabs { flex-direction: column; }
+  .feature-tab { border-radius: 0 !important; width: 100%; max-width: 100%; }
+  .bento-card.large { grid-column: span 1 !important; }
+  
+  .section-pad, .how-section, .stats-band, .features-section, .showcase-section, .pvs-section, .testimonials-section, .results-section, .pricing-section, .letter-section { padding: 60px 20px !important; }
+  .section-heading { font-size: 32px !important; }
+  .steps-row::before, .steps-row::after { display: none; }
+  
+  .pvs-grid { grid-template-columns: 1fr !important; }
+  .letter-card { margin: 0 20px; }
+  .letter-body { padding: 30px 20px; }
+}
+</style>
+</body>
+</html>
+<!-- CHUNK END -->

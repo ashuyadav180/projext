@@ -1,0 +1,23 @@
+INFO:     Will watch for changes in these directories: ['C:\\Projects\\AUTOREEL.AI\\autoreel-ai\\ai-services\\voice_ai']
+INFO:     Uvicorn running on http://127.0.0.1:8002 (Press CTRL+C to quit)
+INFO:     Started reloader process [12684] using StatReload
+INFO:     Started server process [24852]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+[OK] ElevenLabs voice enabled (premium quality)
+[WARN] ElevenLabs error 401: {"detail":{"status":"missing_permissions","message":"The API key you used is missing the permission text_to_speech to execute this operation."}}
+[WARN] ElevenLabs failed, falling back to Edge TTS
+[WARN] ElevenLabs error 401: {"detail":{"status":"missing_permissions","message":"The API key you used is missing the permission text_to_speech to execute this operation."}}
+[WARN] ElevenLabs failed, falling back to Edge TTS
+[OK] Edge TTS voice: voice_1774407607.wav (en-US-ChristopherNeural)
+INFO:     127.0.0.1:65509 - "POST /generate-voice HTTP/1.1" 200 OK
+[OK] Edge TTS voice: voice_1774407612.wav (en-US-ChristopherNeural)
+INFO:     127.0.0.1:65518 - "POST /generate-voice HTTP/1.1" 200 OK
+[WARN] ElevenLabs error 401: {"detail":{"status":"missing_permissions","message":"The API key you used is missing the permission text_to_speech to execute this operation."}}
+[WARN] ElevenLabs failed, falling back to Edge TTS
+[OK] Edge TTS voice: voice_1774407680.wav (en-US-ChristopherNeural)
+INFO:     127.0.0.1:54687 - "POST /generate-voice HTTP/1.1" 200 OK
+[WARN] ElevenLabs error 401: {"detail":{"status":"missing_permissions","message":"The API key you used is missing the permission text_to_speech to execute this operation."}}
+[WARN] ElevenLabs failed, falling back to Edge TTS
+[OK] Edge TTS voice: voice_1774410460.wav (en-US-ChristopherNeural)
+INFO:     127.0.0.1:59342 - "POST /generate-voice HTTP/1.1" 200 OK

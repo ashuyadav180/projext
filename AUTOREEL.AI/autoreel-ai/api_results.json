@@ -1,0 +1,185 @@
+[
+  {
+    "payload": {
+      "model": "veo3.1",
+      "prompt_text": "cinematic shot",
+      "ratio": "720:1280",
+      "duration": 4
+    },
+    "status": 400,
+    "response": {
+      "error": "Validation of body failed",
+      "issues": [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "promptText"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        }
+      ],
+      "docUrl": "https://docs.dev.runwayml.com/api"
+    }
+  },
+  {
+    "payload": {
+      "model": "gen4.5",
+      "prompt_text": "cinematic shot",
+      "ratio": "720:1280",
+      "duration": 5
+    },
+    "status": 400,
+    "response": {
+      "error": "Validation of body failed",
+      "issues": [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "promptText"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        }
+      ],
+      "docUrl": "https://docs.dev.runwayml.com/api"
+    }
+  },
+  {
+    "payload": {
+      "model": "gen3a_alpha",
+      "prompt_text": "cinematic shot",
+      "ratio": "1280:768",
+      "duration": 5
+    },
+    "status": 400,
+    "response": {
+      "error": "Validation of body failed",
+      "issues": [
+        {
+          "code": "invalid_value",
+          "values": [
+            "gen3a_turbo",
+            "gen4.5",
+            "veo3",
+            "veo3.1",
+            "veo3.1_fast"
+          ],
+          "path": [
+            "model"
+          ],
+          "message": "Invalid option: expected one of \"gen3a_turbo\"|\"gen4.5\"|\"veo3\"|\"veo3.1\"|\"veo3.1_fast\""
+        },
+        {
+          "code": "invalid_union",
+          "errors": [],
+          "note": "No matching discriminator",
+          "discriminator": "model",
+          "path": [
+            "model"
+          ],
+          "message": "Invalid input"
+        }
+      ],
+      "docUrl": "https://docs.dev.runwayml.com/api"
+    }
+  },
+  {
+    "payload": {
+      "model": "gen3a_alpha",
+      "prompt_text": "cinematic shot",
+      "ratio": "768:1280"
+    },
+    "status": 400,
+    "response": {
+      "error": "Validation of body failed",
+      "issues": [
+        {
+          "code": "invalid_value",
+          "values": [
+            "gen3a_turbo",
+            "gen4.5",
+            "veo3",
+            "veo3.1",
+            "veo3.1_fast"
+          ],
+          "path": [
+            "model"
+          ],
+          "message": "Invalid option: expected one of \"gen3a_turbo\"|\"gen4.5\"|\"veo3\"|\"veo3.1\"|\"veo3.1_fast\""
+        },
+        {
+          "code": "invalid_union",
+          "errors": [],
+          "note": "No matching discriminator",
+          "discriminator": "model",
+          "path": [
+            "model"
+          ],
+          "message": "Invalid input"
+        }
+      ],
+      "docUrl": "https://docs.dev.runwayml.com/api"
+    }
+  },
+  {
+    "payload": {
+      "model": "gen3a",
+      "prompt_text": "cinematic shot",
+      "ratio": "768:1280"
+    },
+    "status": 400,
+    "response": {
+      "error": "Validation of body failed",
+      "issues": [
+        {
+          "code": "invalid_value",
+          "values": [
+            "gen3a_turbo",
+            "gen4.5",
+            "veo3",
+            "veo3.1",
+            "veo3.1_fast"
+          ],
+          "path": [
+            "model"
+          ],
+          "message": "Invalid option: expected one of \"gen3a_turbo\"|\"gen4.5\"|\"veo3\"|\"veo3.1\"|\"veo3.1_fast\""
+        },
+        {
+          "code": "invalid_union",
+          "errors": [],
+          "note": "No matching discriminator",
+          "discriminator": "model",
+          "path": [
+            "model"
+          ],
+          "message": "Invalid input"
+        }
+      ],
+      "docUrl": "https://docs.dev.runwayml.com/api"
+    }
+  },
+  {
+    "payload": {
+      "model": "gen3a_turbo",
+      "prompt_text": "cinematic shot",
+      "ratio": "768:1280"
+    },
+    "status": 400,
+    "response": {
+      "error": "Validation of body failed",
+      "issues": [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "promptText"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        }
+      ],
+      "docUrl": "https://docs.dev.runwayml.com/api"
+    }
+  }
+]
