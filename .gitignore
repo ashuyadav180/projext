@@ -1,0 +1,7 @@
+# Ignore the massive 27 GB zip archive
+AUTOREEL.AI.zip
+
+# Ignore local environment config
+.vscode/
+graphify-out/
+Project_Report.md
