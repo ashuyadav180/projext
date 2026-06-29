@@ -35,11 +35,12 @@ const logProviders = (jobId, providers) => {
 
 
 // ── AI Service URLs ────────────────────────────────────────────────────────
-const SCRIPT_AI   = process.env.SCRIPT_AI_URL   || "http://127.0.0.1:8005";
-const VOICE_AI    = process.env.VOICE_AI_URL    || "http://127.0.0.1:8002";
-const SUBTITLE_AI = process.env.SUBTITLE_AI_URL || "http://127.0.0.1:8003";
-const VIDEO_AI    = process.env.VIDEO_AI_URL    || "http://127.0.0.1:8004";
-const IMAGE_AI    = process.env.IMAGE_AI_URL    || "http://127.0.0.1:8006";
+const AI_BASE = process.env.AI_SERVICE_URL || "";
+const SCRIPT_AI   = process.env.SCRIPT_AI_URL   || AI_BASE || "http://127.0.0.1:8005";
+const VOICE_AI    = process.env.VOICE_AI_URL    || AI_BASE || "http://127.0.0.1:8002";
+const SUBTITLE_AI = process.env.SUBTITLE_AI_URL || AI_BASE || "http://127.0.0.1:8003";
+const VIDEO_AI    = process.env.VIDEO_AI_URL    || AI_BASE || "http://127.0.0.1:8004";
+const IMAGE_AI    = process.env.IMAGE_AI_URL    || AI_BASE || "http://127.0.0.1:8006";
 
 // ── Progress steps (8 stages) ──────────────────────────────────────────────
 const STEPS = [

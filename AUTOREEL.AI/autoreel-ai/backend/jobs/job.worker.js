@@ -8,8 +8,9 @@ import { runReelPipeline } from "../services/reel.pipeline.js";
 import uploadService from "../services/youtube.service.js";
 const { uploadVideo } = uploadService;
 
-const VIDEO_AI_URL = process.env.VIDEO_AI_URL || "http://127.0.0.1:8004";
-const SCRIPT_AI_URL = process.env.SCRIPT_AI_URL || "http://127.0.0.1:8005";
+const AI_BASE = process.env.AI_SERVICE_URL || "";
+const VIDEO_AI_URL = process.env.VIDEO_AI_URL || AI_BASE || "http://127.0.0.1:8004";
+const SCRIPT_AI_URL = process.env.SCRIPT_AI_URL || AI_BASE || "http://127.0.0.1:8005";
 const CREDITS_PATH = "storage/credits.json";
 
 /**

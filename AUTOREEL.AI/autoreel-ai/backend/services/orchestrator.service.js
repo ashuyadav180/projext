@@ -2,13 +2,14 @@ import axios from "axios";
 import path from "path";
 import { generateLipSync } from "./synclabs.service.js";
 
-/* AI service URLs â€” match start_services.bat port assignments */
-const SCRIPT_AI_URL   = process.env.SCRIPT_AI_URL || "http://127.0.0.1:8005";
-const VOICE_AI_URL    = process.env.VOICE_AI_URL || "http://127.0.0.1:8002";
-const SUBTITLE_AI_URL = process.env.SUBTITLE_AI_URL || "http://127.0.0.1:8003";
-const VIDEO_AI_URL    = process.env.VIDEO_AI_URL || "http://127.0.0.1:8004";
+/* AI service URLs — match start_services.bat port assignments */
+const AI_BASE = process.env.AI_SERVICE_URL || "";
+const SCRIPT_AI_URL   = process.env.SCRIPT_AI_URL || AI_BASE || "http://127.0.0.1:8005";
+const VOICE_AI_URL    = process.env.VOICE_AI_URL || AI_BASE || "http://127.0.0.1:8002";
+const SUBTITLE_AI_URL = process.env.SUBTITLE_AI_URL || AI_BASE || "http://127.0.0.1:8003";
+const VIDEO_AI_URL    = process.env.VIDEO_AI_URL || AI_BASE || "http://127.0.0.1:8004";
 
-const axiosInstance = axios.create({ timeout: 900000 }); // 15min â€” AI generation is slow
+const axiosInstance = axios.create({ timeout: 900000 }); // 15min — AI generation is slow
 
 const PROJECT_ROOT = path.resolve(process.cwd(), "..");
 

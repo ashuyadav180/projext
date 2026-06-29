@@ -5,10 +5,11 @@ import path from "path";
 
 const router = express.Router();
 
-const SCRIPT_AI_URL = process.env.SCRIPT_AI_URL || "http://127.0.0.1:8005";
-const VIDEO_AI_URL  = process.env.VIDEO_AI_URL  || "http://127.0.0.1:8004";
-const IMAGE_AI_URL  = process.env.IMAGE_AI_URL  || "http://127.0.0.1:8006";
-const VOICE_AI_URL  = process.env.VOICE_AI_URL  || "http://127.0.0.1:8002";
+const AI_BASE = process.env.AI_SERVICE_URL || "";
+const SCRIPT_AI_URL = process.env.SCRIPT_AI_URL || AI_BASE || "http://127.0.0.1:8005";
+const VIDEO_AI_URL  = process.env.VIDEO_AI_URL  || AI_BASE || "http://127.0.0.1:8004";
+const IMAGE_AI_URL  = process.env.IMAGE_AI_URL  || AI_BASE || "http://127.0.0.1:8006";
+const VOICE_AI_URL  = process.env.VOICE_AI_URL  || AI_BASE || "http://127.0.0.1:8002";
 
 // ─── Job provider log (in-memory, persisted to file) ─────────────────────────
 const PROVIDER_LOG_PATH = path.join(process.cwd(), "storage", "provider_log.json");
