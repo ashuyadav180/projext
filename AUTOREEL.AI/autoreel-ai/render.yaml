@@ -7,7 +7,7 @@ services:
     name: autoreel-ai-service
     env: docker
     dockerContext: AUTOREEL.AI/autoreel-ai/ai-services
-    dockerfilePath: Dockerfile
+    dockerfilePath: AUTOREEL.AI/autoreel-ai/ai-services/Dockerfile
     plan: free
     region: ohio
     healthCheckPath: /health
