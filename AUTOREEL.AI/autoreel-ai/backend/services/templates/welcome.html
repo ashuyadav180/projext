@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to AUTOREEL.AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0b0b0f;
+      color: #e2e8f0;
+    }
+    .wrapper {
+      width: 100%;
+      table-layout: fixed;
+      background-color: #0b0b0f;
+      padding: 40px 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #12121a;
+      border: 1px solid #23232f;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .header {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+    .header p {
+      margin: 10px 0 0 0;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .content h2 {
+      margin-top: 0;
+      font-size: 22px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .content p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    .features-list {
+      margin: 25px 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    .feature-item {
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      background-color: #1a1a26;
+      border: 1px solid #2a2a3d;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+    }
+    .feature-icon {
+      font-size: 18px;
+      margin-right: 12px;
+      color: #a855f7;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 14px 30px;
+      background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+    .footer {
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #1e1e2d;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .footer a {
+      color: #a855f7;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="header">
+        <h1>AUTOREEL.AI</h1>
+        <p>Your AI Video Co-Pilot</p>
+      </div>
+      <div class="content">
+        <h2>Welcome, {{name}}!</h2>
+        <p>Thank you for choosing AUTOREEL.AI. You have successfully created your account. With AutoReel, you can turn ideas, stories, and prompts into high-performing social media videos in minutes.</p>
+        
+        <p>Here is what you can do next:</p>
+        <div class="features-list">
+          <div class="feature-item">
+            <span class="feature-icon">✨</span>
+            <span><strong>Prompt to Video:</strong> Describe a scene and let AI build it.</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎙️</span>
+            <span><strong>AI Voices & Subtitles:</strong> Generate premium audio narrations and bold, synced captions automatically.</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🚀</span>
+            <span><strong>Auto-Publishing:</strong> Link your YouTube or TikTok and auto-upload rendered reels.</span>
+          </div>
+        </div>
+
+        <a href="{{dashboardUrl}}" class="cta-button">Go to Dashboard</a>
+      </div>
+      <div class="footer">
+        <p>&copy; 2026 AUTOREEL.AI. All rights reserved.</p>
+        <p>If you have any questions, contact us at <a href="mailto:support@autoreel.ai">support@autoreel.ai</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Activated - AUTOREEL.AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0b0b0f;
+      color: #e2e8f0;
+    }
+    .wrapper {
+      width: 100%;
+      table-layout: fixed;
+      background-color: #0b0b0f;
+      padding: 40px 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #12121a;
+      border: 1px solid #23232f;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .header {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .content h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .content p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    .invoice-card {
+      margin: 25px 0;
+      padding: 20px;
+      background-color: #1a1a26;
+      border: 1px solid #2a2a3d;
+      border-radius: 12px;
+    }
+    .invoice-details {
+      margin-bottom: 20px;
+    }
+    .invoice-row {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #cbd5e1;
+      display: flex;
+      justify-content: space-between;
+    }
+    .invoice-row strong {
+      color: #ffffff;
+    }
+    .divider {
+      height: 1px;
+      background-color: #2a2a3d;
+      margin: 15px 0;
+    }
+    .total-row {
+      font-size: 16px;
+      font-weight: 700;
+      color: #a855f7;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    }
+    .footer {
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #1e1e2d;
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="header">
+        <h1>⚡ Subscription Confirmed</h1>
+      </div>
+      <div class="content">
+        <h2>Thank you for upgrading, {{name}}!</h2>
+        <p>Your subscription has been successfully activated. You now have full access to our premium AI video rendering nodes, ElevenLabs high-quality voices, and higher generation limits.</p>
+        
+        <div class="invoice-card">
+          <div class="invoice-details">
+            <div class="invoice-row">
+              <strong>Plan Purchased:</strong>
+              <span>{{planName}}</span>
+            </div>
+            <div class="invoice-row">
+              <strong>Status:</strong>
+              <span>Active ✅</span>
+            </div>
+            <div class="invoice-row">
+              <strong>Billing Cycle:</strong>
+              <span>Monthly</span>
+            </div>
+            <div class="divider"></div>
+            <div class="invoice-row total-row">
+              <strong>Total Charged:</strong>
+              <span>{{price}}</span>
+            </div>
+          </div>
+          <a href="{{dashboardUrl}}" class="cta-button">Go to Dashboard</a>
+        </div>
+
+        <p>A receipt has been billed to your payment method on file. You can manage your subscription and billing details at any time from your account settings.</p>
+      </div>
+      <div class="footer">
+        <p>&copy; 2026 AUTOREEL.AI. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your AI Video is Ready! - AUTOREEL.AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0b0b0f;
+      color: #e2e8f0;
+    }
+    .wrapper {
+      width: 100%;
+      table-layout: fixed;
+      background-color: #0b0b0f;
+      padding: 40px 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #12121a;
+      border: 1px solid #23232f;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .header {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .content h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .content p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    .video-card {
+      margin: 25px 0;
+      padding: 20px;
+      background-color: #1a1a26;
+      border: 1px solid #2a2a3d;
+      border-radius: 12px;
+    }
+    .video-details {
+      margin-bottom: 20px;
+    }
+    .video-row {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .video-row strong {
+      color: #ffffff;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    .footer {
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #1e1e2d;
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="header">
+        <h1>🎬 Video Ready!</h1>
+      </div>
+      <div class="content">
+        <h2>Great news, {{name}}!</h2>
+        <p>Your AI Video generation has finished successfully. The video pipeline has completed rendering, voice narration generation, and subtitle synchronization.</p>
+        
+        <div class="video-card">
+          <div class="video-details">
+            <div class="video-row"><strong>Topic / Prompt:</strong> {{videoTitle}}</div>
+            <div class="video-row"><strong>Niche / Category:</strong> {{niche}}</div>
+            <div class="video-row"><strong>Status:</strong> Completed ✅</div>
+          </div>
+          <a href="{{videoUrl}}" class="cta-button">View / Download Video</a>
+        </div>
+
+        <p>You can also log in to your dashboard to view the generated scenes, customize settings, or manually publish it to other linked accounts.</p>
+      </div>
+      <div class="footer">
+        <p>&copy; 2026 AUTOREEL.AI. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
