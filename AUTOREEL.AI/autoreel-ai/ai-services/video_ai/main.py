@@ -52,7 +52,10 @@ import random
 import glob
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from ass_utils import generate_animated_ass
+try:
+    from video_ai.ass_utils import generate_animated_ass
+except ModuleNotFoundError:
+    from ass_utils import generate_animated_ass
 import json
 from dotenv import load_dotenv
 
