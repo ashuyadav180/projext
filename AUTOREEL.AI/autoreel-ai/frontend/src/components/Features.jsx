@@ -38,7 +38,7 @@ const CARDS = [
 export default function Features() {
   return (
     <section id="features" className="relative z-10 py-24">
-      <div className="max-w-6xl mx-auto px-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
         <Reveal>
           <div className="text-center mb-14">
             <span className="section-label">Platform Features</span>

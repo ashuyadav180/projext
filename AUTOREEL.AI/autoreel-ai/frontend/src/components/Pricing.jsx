@@ -63,8 +63,8 @@ export default function Pricing({ onOpenApp }) {
     const [yearly, setYearly] = useState(true)
 
     return (
-        <section id="pricing" className="relative z-10 py-24">
-            <div className="max-w-6xl mx-auto px-10">
+        <section id="pricing" className="relative z-10 py-16 md:py-24">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
 
                 <Reveal>
                     <div className="text-center mb-10">

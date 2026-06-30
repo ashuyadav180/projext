@@ -20,7 +20,7 @@ const SOLUTIONS = [
 export function ProblemSolution() {
     return (
         <section className="relative z-10 py-24">
-            <div className="max-w-6xl mx-auto px-10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
                 <Reveal>
                     <div className="text-center mb-12">
                         <span className="section-label">Why We're Different</span>
@@ -107,7 +107,7 @@ export function Testimonials() {
 
     return (
         <section id="testimonials" className="relative z-10 py-24 overflow-hidden">
-            <div className="max-w-6xl mx-auto px-10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
                 <Reveal>
                     <div className="text-center mb-12">
                         <span className="section-label">Social Proof</span>
@@ -125,7 +125,7 @@ export function Testimonials() {
                         {TESTIMONIALS.map(t => (
                             <div
                                 key={t.name}
-                                className="min-w-[340px] rounded-[20px] p-6 flex-shrink-0 border border-white/7 bg-surface transition-all duration-200"
+                                className="min-w-[85vw] sm:min-w-[340px] rounded-[20px] p-6 flex-shrink-0 border border-white/7 bg-surface transition-all duration-200"
                                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.3)'}
                                 onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                             >
@@ -194,7 +194,7 @@ export function FAQ() {
     const [open, setOpen] = useState(null)
     return (
         <section id="faq" className="relative z-10 py-24">
-            <div className="max-w-6xl mx-auto px-10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
                 <Reveal>
                     <div className="text-center mb-12">
                         <span className="section-label">FAQ</span>
@@ -243,7 +243,7 @@ export function FAQ() {
 ───────────────────────────────────── */
 export function FinalCTA({ onOpenApp }) {
     return (
-        <section className="relative z-10 py-32 px-10 text-center overflow-hidden">
+        <section className="relative z-10 py-24 px-4 sm:px-6 md:px-10 text-center overflow-hidden">
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 50%,rgba(99,102,241,0.12),transparent 70%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(249,115,22,0.07),transparent 60%)' }}
@@ -293,7 +293,7 @@ export function Footer() {
 
     return (
         <footer
-            className="relative z-10 border-t px-10 pt-16 pb-8"
+            className="relative z-10 border-t px-4 sm:px-6 md:px-10 pt-16 pb-8"
             style={{ background: '#06060f', borderColor: 'rgba(255,255,255,0.07)' }}
         >
             <div className="max-w-6xl mx-auto">

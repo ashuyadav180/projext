@@ -18,7 +18,7 @@ const STEPS = [
 export default function HowItWorks() {
     return (
         <section id="how" className="relative z-10 py-24">
-            <div className="max-w-6xl mx-auto px-10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
                 <Reveal>
                     <div className="text-center mb-16">
                         <span className="section-label">Simple as 1-2-3</span>
