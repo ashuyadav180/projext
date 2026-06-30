@@ -435,7 +435,7 @@ export default function SystemHealthView({ jobs = [], onRefreshJobs }) {
         .sh-int-row:hover        { background: rgba(255,255,255,0.02); }
       `}</style>
 
-      <div style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
+      <div className="system-health-layout">
 
         {/* ── CENTER CONTENT ── */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '0 28px 40px' }}>
@@ -522,7 +522,7 @@ export default function SystemHealthView({ jobs = [], onRefreshJobs }) {
           </div>
 
           {/* 7 SERVICE CARDS — 2-col grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 36 }}>
+          <div className="grid-responsive-2" style={{ gap: 16, marginBottom: 36 }}>
             {SERVICES.map(svc => <ServiceCard key={svc.id} svc={svc} />)}
           </div>
 
@@ -583,11 +583,7 @@ export default function SystemHealthView({ jobs = [], onRefreshJobs }) {
         </div>
 
         {/* ── RIGHT JOBS PANEL ── */}
-        <div style={{
-          width: 320, flexShrink: 0, borderLeft: '1px solid rgba(255,255,255,0.05)',
-          display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'hidden',
-          background: '#08080f',
-        }}>
+        <div className="sh-jobs-panel">
           {/* Jobs header */}
           <div style={{ padding: '16px 18px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: 'rgba(8,8,15,0.9)', backdropFilter: 'blur(10px)', zIndex: 5 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 14, fontWeight: 700, color: '#f1f5f9' }}>

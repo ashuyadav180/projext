@@ -2,14 +2,15 @@ import express from "express";
 import axios from "axios";
 import fs from "fs";
 import path from "path";
+import { getServiceUrl, getPort } from "../utils/url.js";
 
 const router = express.Router();
 
 const AI_BASE = process.env.AI_SERVICE_URL || "";
-const SCRIPT_AI_URL = process.env.SCRIPT_AI_URL || AI_BASE || "http://127.0.0.1:8005";
-const VIDEO_AI_URL  = process.env.VIDEO_AI_URL  || AI_BASE || "http://127.0.0.1:8004";
-const IMAGE_AI_URL  = process.env.IMAGE_AI_URL  || AI_BASE || "http://127.0.0.1:8006";
-const VOICE_AI_URL  = process.env.VOICE_AI_URL  || AI_BASE || "http://127.0.0.1:8002";
+const SCRIPT_AI_URL = getServiceUrl(process.env.SCRIPT_AI_URL, AI_BASE, "script", "http://127.0.0.1:8005");
+const VIDEO_AI_URL  = getServiceUrl(process.env.VIDEO_AI_URL,  AI_BASE, "video",  "http://127.0.0.1:8004");
+const IMAGE_AI_URL  = getServiceUrl(process.env.IMAGE_AI_URL,  AI_BASE, "image",  "http://127.0.0.1:8006");
+const VOICE_AI_URL  = getServiceUrl(process.env.VOICE_AI_URL,  AI_BASE, "voice",  "http://127.0.0.1:8002");
 
 // ─── Job provider log (in-memory, persisted to file) ─────────────────────────
 const PROVIDER_LOG_PATH = path.join(process.cwd(), "storage", "provider_log.json");
@@ -275,7 +276,7 @@ router.get("/service-status", async (req, res) => {
     {
       stage: 1, name: "Script Generation",
       emoji: "📝",
-      microservice: { name: "Script AI", port: Number(new URL(SCRIPT_AI_URL).port || 80), up: scriptData.status === "fulfilled" },
+      microservice: { name: "Script AI", port: getPort(SCRIPT_AI_URL), up: scriptData.status === "fulfilled" },
       providers: [
         { id: "gemini",  label: "Gemini 2.0 Flash",    status: scriptHealth.gemini  ? "active" : "offline", tier: 1, usedFor: "Script (primary)" },
         { id: "claude",  label: "Claude 3.5 Sonnet",   status: scriptHealth.claude  ? "active" : "offline", tier: 2, usedFor: "Script (fallback 1)" },
@@ -286,7 +287,7 @@ router.get("/service-status", async (req, res) => {
     {
       stage: 2, name: "Scene Planning",
       emoji: "🎭",
-      microservice: { name: "Script AI", port: Number(new URL(SCRIPT_AI_URL).port || 80), up: scriptData.status === "fulfilled" },
+      microservice: { name: "Script AI", port: getPort(SCRIPT_AI_URL), up: scriptData.status === "fulfilled" },
       providers: [
         { id: "claude",  label: "Claude 3.5 Sonnet",   status: scriptHealth.claude  ? "active" : "offline", tier: 1, usedFor: "Scenes (primary)" },
         { id: "gemini",  label: "Gemini 2.0 Flash",    status: scriptHealth.gemini  ? "active" : "offline", tier: 2, usedFor: "Scenes (fallback 1)" },
@@ -306,7 +307,7 @@ router.get("/service-status", async (req, res) => {
     {
       stage: 4, name: "Video / Clips",
       emoji: "🎬",
-      microservice: { name: "Video AI", port: Number(new URL(VIDEO_AI_URL).port || 80), up: videoData.status === "fulfilled" },
+      microservice: { name: "Video AI", port: getPort(VIDEO_AI_URL), up: videoData.status === "fulfilled" },
       providers: [
         { id: "kling",   label: "Kling AI v3.0",       status: kling.status,  tier: 1, usedFor: "AI Video clips (primary)", credits: kling.credits, total: kling.total },
         { id: "runway",  label: "RunwayML img2video",  status: runway.status, tier: 2, usedFor: "AI Video clips (fallback 1)", credits: runway.credits, total: runway.total },
@@ -318,7 +319,7 @@ router.get("/service-status", async (req, res) => {
     {
       stage: 5, name: "Voice Synthesis",
       emoji: "🎙️",
-      microservice: { name: "Voice AI", port: Number(new URL(VOICE_AI_URL).port || 80), up: voiceData.status === "fulfilled" },
+      microservice: { name: "Voice AI", port: getPort(VOICE_AI_URL), up: voiceData.status === "fulfilled" },
       providers: [
         { ...elevenlabs, id: "elevenlabs", label: "ElevenLabs",         status: elevenlabs.status, tier: 1, usedFor: "Voice (primary)", primary: true },
         { id: "edgetts",    label: "Edge TTS (Free)",   status: "active",        tier: 2, usedFor: "Voice (free fallback)" },

@@ -186,10 +186,12 @@ export default function ProfileView() {
         .pv-field-row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
         @keyframes pv-fadein { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         .pv-fadein { animation: pv-fadein 0.35s ease both; }
+        .pv-two-col { display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start; }
+        @media (max-width: 768px) { .pv-two-col { grid-template-columns: 1fr; } }
       `}</style>
 
       {/* TWO-COLUMN ROW */}
-      <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, alignItems: "start" }}>
+      <div className="pv-two-col">
 
         {/* LEFT COLUMN */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -360,7 +362,7 @@ export default function ProfileView() {
           {/* Content Preferences */}
           <Card>
             <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 18 }}>🎯 Content Preferences</div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div className="grid-responsive-2" style={{ gap: 20 }}>
               <div>
                 <SectionLabel text="Default Category" />
                 <select style={inputStyle} value={prefs.category} onChange={e => setPrefs(p => ({ ...p, category: e.target.value }))}>

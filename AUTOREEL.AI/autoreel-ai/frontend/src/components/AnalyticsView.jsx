@@ -229,7 +229,7 @@ export default function AnalyticsView() {
             )}
 
             {/* SECTION 1: STAT CARDS */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+            <div className="grid-responsive-4" style={{ gap: '16px' }}>
                 <StatCard label="Total Jobs" value={totalJobs} sub="All time" loading={loading} />
                 <StatCard label="Completed" value={totalCompleted} sub={`${successRate}% success rate`} loading={loading} />
                 <StatCard label="Failed" value={totalFailed} sub="May need retry" loading={loading} />
@@ -285,7 +285,7 @@ export default function AnalyticsView() {
             </div>
 
             {/* SECTION 3: LOWER ROW (2 COLUMNS) */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(400px, 1fr) 1.5fr', gap: '20px' }}>
+            <div className="grid-analytics-main" style={{ gap: '20px' }}>
                 
                 {/* PLATFORM BREAKDOWN */}
                 <div style={{ background: 'var(--card-analytics)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)', padding: '28px' }}>
@@ -394,7 +394,7 @@ export default function AnalyticsView() {
                     <div style={{ fontSize: '24px', fontWeight: '800', fontFamily: 'var(--font-heading)', marginBottom: '8px' }}>Connect your platforms to unlock analytics</div>
                     <div style={{ fontSize: '14px', color: '#888', marginBottom: '32px' }}>Gain deep insights into your video performance across YouTube, TikTok, and Instagram.</div>
                     
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+                    <div className="grid-responsive-3" style={{ gap: '16px', maxWidth: '600px', margin: '0 auto' }}>
                         <button style={{ padding: '12px 24px', background: '#16161E', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '14px', color: '#FFF', fontSize: '14px', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <span style={{ color: '#FF0000' }}>▶</span> Connect YouTube →
                         </button>

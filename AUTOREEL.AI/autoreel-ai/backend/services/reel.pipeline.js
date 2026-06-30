@@ -18,6 +18,7 @@ import path from "path";
 import fs from "fs";
 import { generateTitleAndHashtags } from "./gemini.service.js";
 import storage from "./storage.service.js";
+import { getServiceUrl } from "../utils/url.js";
 const { uploadFile, getAbsPath } = storage;
 
 // ── Provider log helper ────────────────────────────────────────────────────
@@ -36,11 +37,11 @@ const logProviders = (jobId, providers) => {
 
 // ── AI Service URLs ────────────────────────────────────────────────────────
 const AI_BASE = process.env.AI_SERVICE_URL || "";
-const SCRIPT_AI   = process.env.SCRIPT_AI_URL   || AI_BASE || "http://127.0.0.1:8005";
-const VOICE_AI    = process.env.VOICE_AI_URL    || AI_BASE || "http://127.0.0.1:8002";
-const SUBTITLE_AI = process.env.SUBTITLE_AI_URL || AI_BASE || "http://127.0.0.1:8003";
-const VIDEO_AI    = process.env.VIDEO_AI_URL    || AI_BASE || "http://127.0.0.1:8004";
-const IMAGE_AI    = process.env.IMAGE_AI_URL    || AI_BASE || "http://127.0.0.1:8006";
+const SCRIPT_AI   = getServiceUrl(process.env.SCRIPT_AI_URL,   AI_BASE, "script",   "http://127.0.0.1:8005");
+const VOICE_AI    = getServiceUrl(process.env.VOICE_AI_URL,    AI_BASE, "voice",    "http://127.0.0.1:8002");
+const SUBTITLE_AI = getServiceUrl(process.env.SUBTITLE_AI_URL, AI_BASE, "subtitle", "http://127.0.0.1:8003");
+const VIDEO_AI    = getServiceUrl(process.env.VIDEO_AI_URL,    AI_BASE, "video",    "http://127.0.0.1:8004");
+const IMAGE_AI    = getServiceUrl(process.env.IMAGE_AI_URL,    AI_BASE, "image",    "http://127.0.0.1:8006");
 
 // ── Progress steps (8 stages) ──────────────────────────────────────────────
 const STEPS = [

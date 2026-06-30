@@ -164,7 +164,7 @@ export default function Settings({ initialTab = 'profile' }) {
                   </div>
                 </div>
 
-                <div className="options-row" style={{ gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: 20 }}>
+                <div className="options-row grid-responsive-2" style={{ gap: "20px", marginBottom: 20 }}>
                   <div className="opt-group">
                     <label>Full Name</label>
                     <input type="text" className="topic-input" defaultValue="Ashu" onChange={markChanged} />
@@ -403,7 +403,7 @@ export default function Settings({ initialTab = 'profile' }) {
                 <h3>Generation Defaults</h3>
                 <p className="sub">Set standard parameters so you don't configure them on every reel.</p>
                 
-                <div className="options-row" style={{ gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: 20 }}>
+                <div className="options-row grid-responsive-2" style={{ gap: "20px", marginBottom: 20 }}>
                   <div className="opt-group">
                     <label>Default Language</label>
                     <div className="sel-wrap">

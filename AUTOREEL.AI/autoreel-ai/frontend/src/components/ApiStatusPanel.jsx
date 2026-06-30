@@ -228,7 +228,7 @@ const LastGenerations = ({ jobs }) => {
             </span>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+          <div className="grid-responsive-2" style={{ gap: 6 }}>
             {Object.entries(job.providers || {}).map(([stage, provider]) => {
               const failed = provider === "none" || provider === "failed";
               return (
@@ -300,6 +300,7 @@ export default function ApiStatusPanel() {
         padding: "20px 24px", borderBottom: `1px solid ${T.border}`,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         background: T.surface, position: "sticky", top: 0, zIndex: 2,
+        flexWrap: "wrap", gap: 12
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{

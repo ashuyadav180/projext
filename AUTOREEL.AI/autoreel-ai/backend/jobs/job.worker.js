@@ -2,6 +2,7 @@ import { parentPort, workerData } from "worker_threads";
 import fs from "fs";
 import path from "path";
 import axios from "axios";
+import { getServiceUrl } from "../utils/url.js";
 
 // We need to import the pipeline and storage logic
 import { runReelPipeline } from "../services/reel.pipeline.js";
@@ -9,8 +10,8 @@ import uploadService from "../services/youtube.service.js";
 const { uploadVideo } = uploadService;
 
 const AI_BASE = process.env.AI_SERVICE_URL || "";
-const VIDEO_AI_URL = process.env.VIDEO_AI_URL || AI_BASE || "http://127.0.0.1:8004";
-const SCRIPT_AI_URL = process.env.SCRIPT_AI_URL || AI_BASE || "http://127.0.0.1:8005";
+const VIDEO_AI_URL = getServiceUrl(process.env.VIDEO_AI_URL,   AI_BASE, "video",  "http://127.0.0.1:8004");
+const SCRIPT_AI_URL = getServiceUrl(process.env.SCRIPT_AI_URL, AI_BASE, "script", "http://127.0.0.1:8005");
 const CREDITS_PATH = "storage/credits.json";
 
 /**

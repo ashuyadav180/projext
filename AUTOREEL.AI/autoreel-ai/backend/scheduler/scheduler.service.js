@@ -7,15 +7,17 @@
 import axios from "axios";
 import { createNewJob } from "../jobs/job.store.js";
 import { runJob } from "../jobs/job.engine.js";
+import { getServiceUrl } from "../utils/url.js";
 
 // ── DEFAULT CONFIG ─────────────────────────────────────────────────────────
 const DAILY_JOB_LIMIT = 50;
 
+const AI_BASE = process.env.AI_SERVICE_URL || "";
 const AI_SERVICES = [
-  process.env.SCRIPT_AI_URL || "http://127.0.0.1:8005",
-  process.env.VOICE_AI_URL || "http://127.0.0.1:8002",
-  process.env.SUBTITLE_AI_URL || "http://127.0.0.1:8003",
-  process.env.VIDEO_AI_URL || "http://127.0.0.1:8004",
+  getServiceUrl(process.env.SCRIPT_AI_URL,   AI_BASE, "script",   "http://127.0.0.1:8005"),
+  getServiceUrl(process.env.VOICE_AI_URL,    AI_BASE, "voice",    "http://127.0.0.1:8002"),
+  getServiceUrl(process.env.SUBTITLE_AI_URL, AI_BASE, "subtitle", "http://127.0.0.1:8003"),
+  getServiceUrl(process.env.VIDEO_AI_URL,    AI_BASE, "video",    "http://127.0.0.1:8004"),
 ].map((baseUrl) => `${baseUrl.replace(/\/$/, "")}/health`);
 
 const DEFAULT_TOPICS_BY_CATEGORY = {

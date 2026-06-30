@@ -557,6 +557,11 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
   /* Adjust Generator specific inputs */
   .generator-body { padding: 16px; }
   .generator-title { font-size: 13px; }
+
+  /* Settings Page Responsiveness */
+  .settings-layout { flex-direction: column; align-items: stretch; gap: 20px; }
+  .settings-nav { display: flex; flex-direction: row; overflow-x: auto; width: 100%; gap: 8px; padding-bottom: 8px; border-right: none; border-bottom: 1px solid var(--border); }
+  .settings-nav-btn { flex-shrink: 0; white-space: nowrap; }
 }
 
 /* AUTH PAGE PREMIUM */
@@ -666,7 +671,7 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
   .auth-back { top: 16px; right: 16px; }
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .app {
     display: flex !important;
     flex-direction: column;
@@ -703,5 +708,86 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
       flex-direction: column;
       gap: 16px;
       align-items: flex-start !important;
+  }
+}
+
+/* ── AutoReel.AI Responsive Layout Utilities ── */
+.app-layout-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr 340px;
+  flex: 1;
+  min-height: 0;
+}
+.app-layout-grid.no-jobs-panel {
+  grid-template-columns: 260px 1fr;
+}
+.grid-responsive-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.grid-responsive-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.grid-analytics-main {
+  display: grid;
+  grid-template-columns: minmax(400px, 1fr) 1.5fr;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .app-layout-grid, .app-layout-grid.no-jobs-panel {
+    display: flex !important;
+    flex-direction: column;
+  }
+  .grid-responsive-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-analytics-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-layout-grid, .app-layout-grid.no-jobs-panel {
+    display: block !important;
+  }
+  .grid-responsive-2, .grid-responsive-3, .grid-responsive-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* System Health Layout */
+.system-health-layout {
+  display: flex;
+  height: 100%;
+}
+.sh-jobs-panel {
+  width: 320px;
+  flex-shrink: 0;
+  border-left: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: hidden;
+  background: #08080f;
+}
+@media (max-width: 1024px) {
+  .system-health-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  .sh-jobs-panel {
+    width: 100% !important;
+    height: auto !important;
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 }

@@ -327,7 +327,7 @@ export default function PromptToVideo({
         {/* ── GENERATION MODE ─────────────────────────────────────────────── */}
         <div style={{ marginBottom: 20 }}>
           <label style={{ fontSize: 11, fontWeight: 800, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8, display: "block" }}>Generation Mode</label>
-          <div style={{ display: "flex", gap: 8 }}>
+          <div className="grid-responsive-3" style={{ gap: 8 }}>
             {[
               { id: "REEL", label: "🎬 Full Cinematic Reel", sub: "Voice + Music + Subtitles" },
               { id: "CINEMATIC", label: "🎥 Cinematic Video", sub: "Pure Kling V3 Direct (No Voice/Subs)" },
@@ -357,7 +357,7 @@ export default function PromptToVideo({
             <label style={{ fontSize: 11, fontWeight: 800, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8, display: "block" }}>
               Visual Asset Sourcing
             </label>
-            <div style={{ display: "flex", gap: 8 }}>
+            <div className="grid-responsive-2" style={{ gap: 8 }}>
               {[
                 { id: "ai_video", label: "🎨 AI Art Synthesis", sub: "SDXL Generation + Ken Burns" },
                 { id: "stock", label: "📦 Premium Stock Media", sub: "Pexels Context Sourcing" },
@@ -403,7 +403,7 @@ export default function PromptToVideo({
 
         {/* ── LANGUAGE & VOICE SELECTION ─────────────────────────────────── */}
         {generationType === "REEL" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 24 }}>
+          <div className="grid-responsive-2" style={{ gap: 16, marginBottom: 24 }}>
             <div>
               <label style={{ fontSize: 11, fontWeight: 800, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8, display: "block" }}>
                 Script Language
@@ -464,7 +464,7 @@ export default function PromptToVideo({
             <label style={{ fontSize: 11, fontWeight: 800, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10, display: "block" }}>
               🎬 Cinematic Options
             </label>
-            <div style={{ display: "flex", gap: 10 }}>
+            <div className="grid-responsive-2" style={{ gap: 10 }}>
 
               {/* Voice toggle */}
               <button
@@ -540,7 +540,7 @@ export default function PromptToVideo({
 
         {/* ── ACTIONS ────────────────────────────────────────────────────── */}
 
-        <div style={{ display: "flex", gap: 10 }}>
+        <div className="grid-responsive-2" style={{ gap: 10 }}>
           <motion.button
             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
             onClick={handleEnhance}

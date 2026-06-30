@@ -105,6 +105,14 @@ function ApiQuickStatus({ onOpenFull }) {
 export default function Dashboard() {
   const [page, setPage] = useState('studio');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const { showToast } = useToast();
   const [stats, setStats] = useState({ total: 0, completed: 0, posted: 0, failed: 0 });
   const [trends, setTrends] = useState([]);
@@ -337,37 +345,47 @@ export default function Dashboard() {
     <div className="dashboard-root" style={{ background: '#0F0F14', color: '#FFFFFF', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* TOP NAVIGATION */}
-      <nav className="topbar" style={{ height: '64px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 100, borderBottom: '1px solid #1A1A24' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+      <nav className="topbar" style={{ zIndex: 100 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {isMobile && (
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+              className="mobile-menu-btn"
+              style={{ display: "flex", background: "none", border: "none", color: "#FFF", fontSize: "24px", cursor: "pointer", marginRight: "4px", outline: "none", alignItems: "center" }}
+            >
+              ☰
+            </button>
+          )}
           <div className="logo" style={{ fontSize: '20px', fontWeight: '800' }}>
             <div className="logo-mark">A</div> AutoReel<span>.AI</span>
           </div>
           
-          <div style={{ display: 'flex', gap: '4px' }}>
-            {[
-              { id: 'studio', label: 'Studio' }, 
-              { id: 'analytics', label: 'Analytics' }, 
-              { id: 'library', label: 'Library' }, 
-              { id: 'api-status', label: '🔌 API Status' },
-              { id: 'system', label: 'System' }
-            ].map(tab => (
-
-              <button 
-                key={tab.id}
-                onClick={() => handleSetPage(tab.id)}
-                className={`tab-btn ${page === tab.id ? 'active' : ''}`}
-                style={{ padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '600' }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          {!isMobile && (
+            <div style={{ display: 'flex', gap: '4px' }}>
+              {[
+                { id: 'studio', label: 'Studio' }, 
+                { id: 'analytics', label: 'Analytics' }, 
+                { id: 'library', label: 'Library' }, 
+                { id: 'api-status', label: '🔌 API Status' },
+                { id: 'system', label: 'System' }
+              ].map(tab => (
+                <button 
+                  key={tab.id}
+                  onClick={() => handleSetPage(tab.id)}
+                  className={`tab-btn ${page === tab.id ? 'active' : ''}`}
+                  style={{ padding: '8px 16px', borderRadius: '10px', fontSize: '14px', fontWeight: '600' }}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          {page === 'system' && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {page === 'system' && !isMobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '6px 12px', background: '#16161E', borderRadius: '10px', border: '1px solid #2A2A3A' }}>
-              <span style={{ fontSize: '11px', fontWeight: '800', color: '#888' }}>AUTO-SYNC</span>
+              <span style={{ fontSize: '11px', fontWeight: '800', color: '#88' }}>AUTO-SYNC</span>
               <div 
                 onClick={() => setAutoSync(!autoSync)}
                 style={{ width: '36px', height: '20px', background: autoSync ? '#6366f1' : '#333', borderRadius: '10px', position: 'relative', cursor: 'pointer', transition: '0.3s' }}
@@ -377,16 +395,20 @@ export default function Dashboard() {
             </div>
           )}
 
-          <div className="search-box">
-             <span>🔍</span>
-             <input type="text" placeholder="Search..." style={{ background: 'transparent', border: 'none', outline: 'none', color: '#FFF', fontSize: '13px', width: '120px' }} />
-             <kbd>⌘K</kbd>
-          </div>
+          {!isMobile && (
+            <div className="search-box">
+               <span>🔍</span>
+               <input type="text" placeholder="Search..." style={{ background: 'transparent', border: 'none', outline: 'none', color: '#FFF', fontSize: '13px', width: '120px' }} />
+               <kbd>⌘K</kbd>
+            </div>
+          )}
           
-          <div className="credits-pill" style={{ background: socketConnected ? 'rgba(34,197,94,0.05)' : 'rgba(249,115,22,0.05)', border: `1px solid ${socketConnected ? 'rgba(34,197,94,0.1)' : 'rgba(249,115,22,0.15)'}`, color: socketConnected ? '#22c55e' : '#f97316' }}>
-            <div className="dot" style={{ background: socketConnected ? '#22c55e' : '#f97316', boxShadow: socketConnected ? '0 0 8px #22c55e' : '0 0 8px #f97316' }}></div>
-            <span>{socketConnected ? 'Live · Connected' : 'Offline'}</span>
-          </div>
+          {!isMobile && (
+            <div className="credits-pill" style={{ background: socketConnected ? 'rgba(34,197,94,0.05)' : 'rgba(249,115,22,0.05)', border: `1px solid ${socketConnected ? 'rgba(34,197,94,0.1)' : 'rgba(249,115,22,0.15)'}`, color: socketConnected ? '#22c55e' : '#f97316' }}>
+              <div className="dot" style={{ background: socketConnected ? '#22c55e' : '#f97316', boxShadow: socketConnected ? '0 0 8px #22c55e' : '0 0 8px #f97316' }}></div>
+              <span>{socketConnected ? 'Live' : 'Offline'}</span>
+            </div>
+          )}
 
           <button className="refresh-btn" style={{ background: '#16161E', borderRadius: '10px' }}>🔔</button>
           
@@ -394,10 +416,14 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      <div className="app" style={{ display: 'grid', gridTemplateColumns: (page === 'system' || page === 'profile') ? '260px 1fr' : '260px 1fr 340px', flex: 1, minHeight: 0 }}>
+      <div className={page === 'system' || page === 'profile' || page === 'api-status' ? "app-layout-grid no-jobs-panel" : "app-layout-grid"}>
         
+        {isMobile && isMobileMenuOpen && (
+          <div className="mobile-backdrop" onClick={() => setIsMobileMenuOpen(false)} style={{ zIndex: 99 }} />
+        )}
+
         {/* SIDEBAR */}
-        <aside className="sidebar" style={{ background: '#0F0F14', borderRight: '1px solid #1A1A24', padding: '24px 16px' }}>
+        <aside className={`sidebar ${isMobile && isMobileMenuOpen ? 'open' : ''}`} style={isMobile ? { zIndex: 100 } : { background: '#0F0F14', borderRight: '1px solid #1A1A24', padding: '24px 16px' }}>
           <div className="sidebar-section">
             <div className="sidebar-label" style={{ marginBottom: '12px' }}>CREATE</div>
             <button className={`nav-item ${page === 'studio' ? 'active' : ''}`} onClick={() => handleSetPage('studio')}>
@@ -441,7 +467,7 @@ export default function Dashboard() {
         </aside>
 
         {/* MAIN CONTENT AREA */}
-        <main className="center" style={{ padding: '32px', overflowY: 'auto' }}>
+        <main className="center" style={{ overflowY: 'auto' }}>
           
           <AnimatePresence mode="wait">
             {page === 'system' && (
@@ -518,7 +544,7 @@ export default function Dashboard() {
                                 <button className="create-btn" onClick={() => handleSetPage('studio')}>Go to Studio</button>
                             </div>
                         ) : (
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+                            <div className="grid-responsive-3" style={{ gap: '20px' }}>
                                 {library.map((vid) => (
                                     <motion.div 
                                         key={vid.id} 
@@ -688,7 +714,7 @@ export default function Dashboard() {
                           <p style={{ color: '#888', fontSize: '14px', margin: 0 }}>Generate short-form reels with AI — powered by AutoReel Engine v2</p>
                         </div>
         
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+                        <div className="grid-responsive-4" style={{ gap: '16px', marginBottom: '32px' }}>
                           {[
                             { label: 'TOTAL JOBS', val: stats.total, change: '↑ 12 today', type: 'total' },
                             { label: 'COMPLETED', val: stats.completed, change: `99.4% success rate`, type: 'completed' },
@@ -733,7 +759,7 @@ export default function Dashboard() {
         </main>
 
         {page !== 'system' && page !== 'profile' && page !== 'api-status' && (
-          <aside className="jobs-panel" style={{ background: '#0F0F14', borderLeft: '1px solid #1A1A24', padding: '24px 16px', display: 'flex', flexDirection: 'column' }}>
+          <aside className="jobs-panel" style={isMobile ? { borderTop: '1px solid #1A1A24', padding: '24px 16px' } : { background: '#0F0F14', borderLeft: '1px solid #1A1A24', padding: '24px 16px', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
                <h2 style={{ fontSize: '18px', fontWeight: '800', margin: 0 }}>Jobs <span style={{ color: '#888', fontSize: '14px', fontWeight: '500' }}>{jobs.length}</span></h2>
                <button className="refresh-btn" onClick={fetchJobs} style={{ background: '#16161E' }}>↻</button>

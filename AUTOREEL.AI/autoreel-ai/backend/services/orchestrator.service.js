@@ -1,13 +1,14 @@
 import axios from "axios";
 import path from "path";
 import { generateLipSync } from "./synclabs.service.js";
+import { getServiceUrl } from "../utils/url.js";
 
 /* AI service URLs — match start_services.bat port assignments */
 const AI_BASE = process.env.AI_SERVICE_URL || "";
-const SCRIPT_AI_URL   = process.env.SCRIPT_AI_URL || AI_BASE || "http://127.0.0.1:8005";
-const VOICE_AI_URL    = process.env.VOICE_AI_URL || AI_BASE || "http://127.0.0.1:8002";
-const SUBTITLE_AI_URL = process.env.SUBTITLE_AI_URL || AI_BASE || "http://127.0.0.1:8003";
-const VIDEO_AI_URL    = process.env.VIDEO_AI_URL || AI_BASE || "http://127.0.0.1:8004";
+const SCRIPT_AI_URL   = getServiceUrl(process.env.SCRIPT_AI_URL,   AI_BASE, "script",   "http://127.0.0.1:8005");
+const VOICE_AI_URL    = getServiceUrl(process.env.VOICE_AI_URL,    AI_BASE, "voice",    "http://127.0.0.1:8002");
+const SUBTITLE_AI_URL = getServiceUrl(process.env.SUBTITLE_AI_URL, AI_BASE, "subtitle", "http://127.0.0.1:8003");
+const VIDEO_AI_URL    = getServiceUrl(process.env.VIDEO_AI_URL,    AI_BASE, "video",    "http://127.0.0.1:8004");
 
 const axiosInstance = axios.create({ timeout: 900000 }); // 15min — AI generation is slow
 
